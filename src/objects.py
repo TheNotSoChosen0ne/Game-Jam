@@ -1,4 +1,5 @@
 class Clue():
+
     def __init__(self, name : str, type : str, findingMessage : str):
         self.find = False
         self.type = type
@@ -13,5 +14,5 @@ class Clue():
 
     def collect(self, inventory):
         inventory.addObject(self)
-        print(self.name + " ajouté à : " + inventory.name)
+        print(f"{self.name} ajouté à : {inventory.name}")
         return
