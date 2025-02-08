@@ -3,7 +3,11 @@ import pygame
 def credits(screen, clock, fps=30):
     pygame.mixer.init()
     pygame.mixer.music.load("music/credits.mp3")
-    pygame.mixer.music.play(-1)
+    pygame.mixer.music.play()
+    img = pygame.image.load("img/credits.jpg").convert()
+    img = pygame.transform.scale(img, (screen.get_width(), screen.get_height()))
+    # set opacity to 80%
+    img.set_alpha(200)
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     font = pygame.font.Font("pixel_font.otf", 42)
@@ -22,7 +26,7 @@ def credits(screen, clock, fps=30):
 
     credit_surfaces = [font.render(line, True, WHITE) for line in credits]
     credit_y = screen.get_height()
-    credit_speed = 3
+    credit_speed = 2
     running = True
     while running:
         for event in pygame.event.get():
@@ -32,6 +36,7 @@ def credits(screen, clock, fps=30):
                 if event.key == pygame.K_ESCAPE:
                     running = False
         screen.fill(BLACK)
+        screen.blit(img, (screen.get_width() // 2 - img.get_width() // 2, screen.get_height() // 2 - img.get_height() // 2))
         for i, surface in enumerate(credit_surfaces):
             screen.blit(surface, (screen.get_width() // 2 - surface.get_width() // 2, credit_y + i * 40))
         credit_y -= credit_speed
@@ -39,4 +44,4 @@ def credits(screen, clock, fps=30):
             credit_y = screen.get_height()
         pygame.display.flip()
         clock.tick(fps)
-        pygame.mixer.music.stop()
+    pygame.mixer.music.stop()
