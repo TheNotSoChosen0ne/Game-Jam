@@ -22,7 +22,7 @@ def credits(screen, clock, fps=30):
         "",
         "Yanis With: Bonsoir jeune aventurier, veux-tu faire la quête du forgeron ?",
         "",
-        "Special Thanks:" 
+        "Special Thanks:",
         "Mr. Guillaumat",
         "Fab",
         "Lorem Ipsum",
