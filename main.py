@@ -125,6 +125,8 @@ def main():
             stress_bar.start()
             game.startClock()
             first_start = 1
+            music_menu.load_music()
+            music_menu.play_music()
 
         elif not game.menu.active:
             music_menu.stop_music()
@@ -132,6 +134,8 @@ def main():
             game.runGame(window.screen)
             stress_bar.update()
             stress_bar.draw(window.screen)
+            music_menu.load_music()
+            music_menu.play_music()
 
         window.screen.blit(frames, (0, 0))
 
