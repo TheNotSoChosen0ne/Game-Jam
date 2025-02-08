@@ -11,6 +11,11 @@ class Player(Sprite):
         self.speed = 30
         return
     
+    def draw(self, screen):
+        sprite_rect = self.image.get_rect()
+        sprite_rect.topleft = (self.position[0], self.position[1] - sprite_rect.height)
+        screen.blit(self.image, sprite_rect.topleft)
+    
     def move(self, keys):
         """Déplace le personnage selon les touches pressées."""
         if not self.movable:
@@ -18,13 +23,13 @@ class Player(Sprite):
 
         x, y = self.position
 
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT] and x >= 130:
             x -= self.speed
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] and x <= 400:
             x += self.speed
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_UP] and y >= 250:
             y -= self.speed
-        if keys[pygame.K_DOWN]:
+        if keys[pygame.K_DOWN] and y <= 920:
             y += self.speed
 
         self.position = (x, y)
