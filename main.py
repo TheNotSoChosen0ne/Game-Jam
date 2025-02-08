@@ -24,8 +24,8 @@ def main():
 
     imageStartButton = pygame.image.load("./img/Modern_UI_Pack/Buttons/Normal/Play.png")
     imageCreditButton = pygame.image.load("./img/Modern_UI_Pack/Buttons/Normal/Community.png")
-    startButton = ImageButton(imageStartButton, 1920 / 2, 1080 / 2)
-    creditButton = ImageButton(imageCreditButton, 1920 / 2, 1080 / 2 + 200)
+    startButton = ImageButton(imageStartButton, 1920 / 2, 1080 / 2, "start")
+    creditButton = ImageButton(imageCreditButton, 1920 / 2, 1080 / 2 + 200, "credits")
     menu = Menu()
     menu.addButton(startButton)
     menu.addButton(creditButton)
@@ -39,19 +39,25 @@ def main():
         current = time.time()
         logtime = window.font.render("time: " + str(int(current - window.startTime)), 1, WHITE)
 
+        # Check events
         for event in pygame.event.get():
             window.checkEvents(event)
             if menu.active:
                 menu.handle_event(event)
-            if False:
-                credits(window.screen, window.clock)
 
+        # Print the menu
         if menu.active:
             window.screen.blit(window.backgrnd, (0, 0))
             menu.draw(window.screen)
 
+        # Print credits
+        if menu.credits:
+            credits(window.screen, window.clock)
+            menu.credits = False
+
+        # The game
         if not menu.active:
-            window.screen.fill((0, 0, 0))
+            window.screen.fill((0, 0, 0)) # Make the screen full black
 
         window.screen.blit(frames, (0, 0))
         window.screen.blit(logtime, (0, 30))
