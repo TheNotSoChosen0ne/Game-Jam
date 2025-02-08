@@ -73,7 +73,7 @@ pygame.mouse.set_visible(False)
 stress_bar = StressBar(x=1730, y=220)
 
 # GAME INIT
-game = Game(player, rooms, menu, fruits)
+game = Game(player, rooms, menu, fruits, stress_bar)
 
 # MAIN LOOP
 def main():

@@ -7,12 +7,13 @@ from src.classes.player import *
 from src.classes.menu import *
 from src.classes.window import *
 from src.classes.objects import Item
+from src.classes.stress_bar import *
 
 DAY = 1
 NIGHT = 0
 
 class Game():
-    def __init__(self, player : Player, rooms : list["Room"], menu : Menu, items : list["Item"]):
+    def __init__(self, player : Player, rooms : list["Room"], menu : Menu, items : list["Item"], stress : StressBar):
         self.start_time = time.time()
         self.clock = pygame.time.Clock()
         self.actual_room = "office"
@@ -21,6 +22,7 @@ class Game():
         self.cycle = DAY
         self.menu = menu
         self.items = items
+        self.stress = stress
         self.font = pygame.font.Font("assets/font/pixel_font.otf", 42)
         return
 
@@ -46,7 +48,7 @@ class Game():
         for item in self.items:
             item.rotate()
             item.update()
-            item.collect(self.player)    
+            item.collect(self.player, self.stress)    
             item.draw(screen)
         self.player.draw(screen)
         return

@@ -1,6 +1,7 @@
 import pygame
 import random
 from src.classes.player import Player
+from src.classes.stress_bar import *
 
 class Item():
 
@@ -13,10 +14,15 @@ class Item():
         self.center = center
         self.offset = self.pos - self.center
         self.state = "collected"
+        self.start_time = 0.0
         return
 
     def update(self):
-        pass
+        if self.state == "collected" and time.time() - self.start_time > 3.0:
+            self.state = "spawned"
+
+    def startClock(self):
+        self.start_time = time.time()
 
     def rotate(self):
         dangle = self.speed
@@ -33,8 +39,11 @@ class Item():
         screen.blit(rotated_image, sprite_rect.topleft)
         return
 
-    def collect(self, player : Player):
+    def collect(self, player : Player, stress_bar : StressBar):
         keys = pygame.key.get_pressed()
-        if player.position.distance_to(self.pos) < 100:
+        if player.position.distance_to(self.pos) < 60 and self.state == "spawned":
             if keys[pygame.K_e]:
                 self.state = "collected"
+                stress_bar.change_stress(-5)
+                self.startClock()
+
