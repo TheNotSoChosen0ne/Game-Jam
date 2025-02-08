@@ -3,6 +3,7 @@
 import os
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
+from src.classes.stress_bar import *
 from src.classes.characters import *
 from src.classes.inventory import *
 from src.classes.objects import *
@@ -64,6 +65,8 @@ def main():
 
     pygame.mouse.set_visible(False)
     window.startClock()
+    stress_bar = StressBar(x=1000, y=0)
+    first_start = 0
     while window.running:
 
         window.clock.tick(window.fps)
@@ -92,11 +95,18 @@ def main():
         elif game.menu.active:
             window.screen.blit(window.backgrnd, (0, 0))
             game.menu.draw(window.screen)
-
         # The game
+        elif not game.menu.active and first_start == 0:
+            window.screen.fill(BLACK)
+            game.runGame(window.screen)
+            stress_bar.start()
+            first_start = 1
+
         elif not game.menu.active:
             window.screen.fill(BLACK)
             game.runGame(window.screen)
+            stress_bar.update()
+            stress_bar.draw(window.screen)
 
 
         window.screen.blit(frames, (0, 0))

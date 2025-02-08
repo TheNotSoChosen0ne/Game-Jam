@@ -21,7 +21,7 @@ class StressBar:
         self.current_stress = 0  # Starts with no stress
         self.color = (255, 0, 0)  # Red color for stress bar
         self.active = False  # The timer starts when game starts
-        self.last_update_time = None  # Will be set when activated
+        self.last_update_time = 0.0  # Will be set when activated
 
     def start(self):
         """
@@ -63,4 +63,4 @@ class StressBar:
                          (self.x, self.y + self.height - filled_height, self.width, filled_height))
 
         # Draw the border
-        pygame.draw.rect(screen, (0, 0, 0), (self.x, self.y, self.width, self.height), 3)
+        pygame.draw.rect(screen, (255, 255, 255), (self.x, self.y, self.width, self.height), 3)
