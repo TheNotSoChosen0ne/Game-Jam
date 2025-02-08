@@ -23,13 +23,13 @@ class Player(Sprite):
 
         x, y = self.position
 
-        if keys[pygame.K_LEFT] and x >= 130:
+        if (keys[pygame.K_LEFT] or keys[pygame.K_q]) and x >= 130:
             x -= self.speed
-        if keys[pygame.K_RIGHT] and x <= 880:
+        if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and x <= 880:
             x += self.speed
-        if keys[pygame.K_UP] and y >= 250:
+        if (keys[pygame.K_UP] or keys[pygame.K_z]) and y >= 250:
             y -= self.speed
-        if keys[pygame.K_DOWN] and y <= 920:
+        if (keys[pygame.K_DOWN] or keys[pygame.K_s]) and y <= 920:
             y += self.speed
 
         self.position = (x, y)
