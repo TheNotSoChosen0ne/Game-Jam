@@ -16,26 +16,16 @@ def credits(screen, clock, fps=30):
 
     credits = [
         "Script: Loann Badina",
-        "",
-        "Art: Nicolas Bach",
-        "",
-        "Game Developer:",
-        "Lilian Locher",
-        "Corentin Pasquier",
-        "Nicolas Bach",
-        "Loann Badina",
-        "Thibaut Musslin (acte de présence)",
-        "",
-        "Audio Engineer: Thibaut Musslin",
+        "Art: Nicolas Bach & Yanis With",
+        "Game Developer: Lilian Locher & Loann Badina & Corentin Pasquier",
+        "Audio Engineer: Thibaut Musslin <3",
         "",
         "Yanis With: Bonsoir jeune aventurier, veux-tu faire la quête du forgeron ?",
         "",
         "Special Thanks:",
         "Mr. Guillaumat",
-        "Fab",
-        "Stan",
-        "Lorem Ipsum",
-        "Les M&M's Crispy sont là",
+        "Fab et Stan <3",
+        "Lorem Ipsum sitame",
     ]
 
     credit_surfaces = [font.render(line, True, WHITE) for line in credits]
