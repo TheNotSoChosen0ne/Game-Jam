@@ -5,24 +5,29 @@ class Player:
     def __init__(self, name: str, spritesheet, frame_width: int, frame_height: int, num_frames: int, 
                  pos_x: int, pos_y: int, delay: int, rotation_center):
         self.name = name
+        # Découper les frames du spritesheet
         self.frames = [
             spritesheet.subsurface(pygame.Rect(i * frame_width, 0, frame_width, frame_height))
             for i in range(num_frames)
         ]
         
-        # Position et animation
+        # Position absolue et calcul de l'offset par rapport au centre de rotation
         self.position = pygame.Vector2(pos_x, pos_y)
+        self.rotation_center = pygame.Vector2(rotation_center)
+        self.offset = self.position - self.rotation_center  # Vecteur relatif
+        self.limits = [self.position.x, self.position.y]
+        
+        # Animation
         self.index = 0
         self.timer = 0
         self.delay = delay
         self.image = self.frames[self.index]
         
-        # Contrôle du mouvement et de l’orientation
+        # Contrôle du mouvement et de l'orientation
         self.speed = 30
-        self.angle = 0            # Orientation en degrés (0° signifie que la tête pointe vers le haut)
+        self.angle = 0  # En degrés, 0° signifie que la tête pointe vers le haut
         self.rotation_speed = 2
         self.rotation_direction = 1  # 1 pour horaire, -1 pour anti-horaire
-        self.rotation_center = pygame.Vector2(rotation_center)  # Centre de rotation fixe
 
     def update(self):
         """Met à jour l’animation."""
@@ -40,38 +45,58 @@ class Player:
 
     def move(self, keys):
         """
-        Déplace le joueur selon son axe local (déplacements activables par touches).
-        Cette méthode n'est pas modifiée ici.
+        Déplace le joueur selon son axe local.
+        On suppose que l'angle définit l'orientation du joueur :
+          - UP   : avance dans la direction "avant" (local forward = (sin(angle), –cos(angle)))
+          - DOWN : recule (local backward = (–sin(angle), cos(angle)))
+          - LEFT : décalage latéral à gauche (local left = (–cos(angle), –sin(angle)))
+          - RIGHT: décalage latéral à droite (local right = (cos(angle), sin(angle)))
+        Après le déplacement, on met à jour l'offset.
         """
         movement = pygame.Vector2(0, 0)
         rad = math.radians(self.angle)
         
         if keys[pygame.K_UP]:
-            movement += pygame.Vector2(math.sin(rad), -math.cos(rad)) * self.speed
+            if self.limits[1] <= 200:
+                pass
+            else:
+                movement += pygame.Vector2(math.sin(rad), -math.cos(rad)) * self.speed
+                self.limits[1] -= self.speed
         if keys[pygame.K_DOWN]:
-            movement += pygame.Vector2(-math.sin(rad), math.cos(rad)) * self.speed
+            if self.limits[1] >= 890:
+                pass
+            else:
+                movement += pygame.Vector2(-math.sin(rad), math.cos(rad)) * self.speed
+                self.limits[1] += self.speed
         if keys[pygame.K_LEFT]:
-            movement += pygame.Vector2(-math.cos(rad), -math.sin(rad)) * self.speed
+            if self.limits[0] <= 150:
+                pass
+            else:
+                movement += pygame.Vector2(-math.cos(rad), -math.sin(rad)) * self.speed
+                self.limits[0] -= self.speed
         if keys[pygame.K_RIGHT]:
-            movement += pygame.Vector2(math.cos(rad), math.sin(rad)) * self.speed
+            if self.limits[0] >= 940:
+                pass
+            else:
+                movement += pygame.Vector2(math.cos(rad), math.sin(rad)) * self.speed
+                self.limits[0] += self.speed
         
         self.position += movement
+        # Met à jour l'offset par rapport au centre de rotation
+        self.offset = self.position - self.rotation_center
 
     def rotate(self):
         """
-        Fait tourner le joueur autour du centre de rotation fixe.
-        À chaque appel, l'angle est mis à jour, puis la position du joueur est recalculée
-        pour qu'il orbite autour de `self.rotation_center` en conservant sa distance initiale.
+        Fait tourner le joueur autour du centre de rotation.
+        La rotation est appliquée en tournant le vecteur offset.
+        Ainsi, si le joueur est déplacé et que l'offset varie, il pourra
+        traverser le centre et passer de l'autre côté.
         """
         # Mise à jour de l'angle
-        self.angle = (self.angle + self.rotation_speed * self.rotation_direction) % 360
-
-        # Calcul de l'offset entre la position actuelle et le centre de rotation
-        offset = self.position - self.rotation_center
-        distance = offset.length()
-
-        # Recalcul de la position pour qu'elle soit sur le cercle de rayon "distance" autour du centre,
-        # avec le nouvel angle
-        rad = math.radians(self.angle)
-        self.position.x = self.rotation_center.x + math.cos(rad) * distance
-        self.position.y = self.rotation_center.y + math.sin(rad) * distance
+        delta_angle = self.rotation_speed * self.rotation_direction
+        self.angle = (self.angle + delta_angle) % 360
+        
+        # Faire tourner le vecteur offset
+        self.offset = self.offset.rotate(delta_angle)
+        # Recalculer la position à partir du centre et du nouvel offset
+        self.position = self.rotation_center + self.offset
