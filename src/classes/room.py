@@ -15,13 +15,22 @@ class Door(StaticSprite):
         return
 
 
-class Room():
-    
-    def __init__(self, sprite, objects, doors):
+class Room:
+    def __init__(self, sprite, objects, doors, x, y):
         self.sprite = sprite
         self.objects = objects
         self.doors = doors
-        return
-    
+        self.position = pygame.Vector2(x, y)
+        self.angle = 0
+        self.rotation_speed = 2
+        self.rotation_direction = 1  # Toujours tourner dans le même sens
+
     def draw(self, screen):
-        screen.blit(self.sprite, (0, 0))
+        """Affiche la room avec sa rotation appliquée."""
+        rotated_sprite = pygame.transform.rotate(self.sprite, -self.angle)
+        rect = rotated_sprite.get_rect(center=self.position)
+        screen.blit(rotated_sprite, rect.topleft)
+
+    def rotate(self):
+        """Fait tourner la room en continu dans le même sens."""
+        self.angle = (self.angle + self.rotation_speed * self.rotation_direction) % 360

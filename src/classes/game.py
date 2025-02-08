@@ -31,7 +31,8 @@ class Game():
         return
 
     def runGame(self, screen):
+        self.rooms[self.actual_room].rotate()
         self.rooms[self.actual_room].draw(screen)
-        self.player.update()
+        self.player.rotate()
         self.player.draw(screen)
         return
