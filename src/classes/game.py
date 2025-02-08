@@ -1,5 +1,4 @@
 import pygame
-from typing import List
 
 from src.classes.room import *
 from src.classes.player import *
@@ -10,7 +9,7 @@ DAY = 1
 NIGHT = 0
 
 class Game():
-    def __init__(self, player : Player, rooms : List["Room"], menu : Menu):
+    def __init__(self, player : Player, rooms : list["Room"], menu : Menu):
         self.actual_room = "office"
         self.rooms = rooms
         self.player = player
