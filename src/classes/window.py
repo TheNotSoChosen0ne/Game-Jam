@@ -36,12 +36,12 @@ class Window():
         self.clock = pygame.time.Clock()
         return
 
-    def checkEvents(self, event):
+    def checkEvents(self, event, menu):
         if event.type == pygame.QUIT:
             self.running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                self.running = False
+                menu.active = True
         return
 
     def refresh(self):

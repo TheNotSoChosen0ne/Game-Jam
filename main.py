@@ -70,7 +70,7 @@ def main():
 
         # Check events
         for event in pygame.event.get():
-            window.checkEvents(event)
+            window.checkEvents(event, menu)
             if game.menu.active:
                 game.menu.handle_event(event, window)
             elif game.menu.active == False and game.menu.credits == False:

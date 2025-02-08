@@ -36,16 +36,7 @@ class Menu():
         return
 
     def handle_event(self, event, window):
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            for button in self.buttons:
-                if button.imageRect.collidepoint(event.pos):
-                    if button.type == "credits":
-                        self.credits = True
-                        self.active = False
-                    elif button.type == "start":
-                        self.active = False
-                    return
-        elif event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 if self.buttons[self.activeIndex].type == "start":
                     self.active = False
