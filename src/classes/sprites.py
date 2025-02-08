@@ -1,11 +1,13 @@
 import pygame
 
-class Sprites():
+class Sprite():
 
-    def __init__(self, spritesheet, frame_rects, pos_x, pos_y, delay):
-        self.frames = [spritesheet.subsurface(pygame.Rect(rect)) for rect in frame_rects]
+    def __init__(self, spritesheet, frame_width : int, frame_height : int, num_frames : int, pos_x : int, pos_y : int):
+        self.frames = [
+            spritesheet.subsurface(pygame.Rect(i * frame_width, 0, frame_width, frame_height))
+            for i in range(num_frames)
+        ]
         self.position = (pos_x, pos_y)
-        self.delay = delay
         self.index = 0
         self.timer = 0
         self.image = self.frames[self.index]
@@ -19,6 +21,7 @@ class Sprites():
 
     def draw(self, screen):
         screen.blit(self.image, self.position)
+
 
 class StaticSprite():
 
