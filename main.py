@@ -19,7 +19,15 @@ import pygame
 import time
 
 # PLAYER INIT
-player = Player("Stellan Voss", pygame.image.load("assets/img/sprites/37707_female_front.png"), 16, 32, 1, 100, 250, 1)
+player = Player(
+    "Stellan Voss",
+    {
+        "back": pygame.image.load("assets/img/sprite_detective/detective_back.png"),
+        "front": pygame.image.load("assets/img/sprite_detective/detective_front.png"),
+        "left": pygame.image.load("assets/img/sprite_detective/detective_back.png"),
+        "right": pygame.image.load("assets/img/sprite_detective/detective_back.png"),
+    },
+    16, 32, 1, 100, 250, 1)
 
 # ROOMS INIT
 rooms = {
