@@ -63,9 +63,9 @@ menu.addButton(quitButton)
 
 # FRUIT INIT
 fruits = [
-    Item(5, pygame.image.load("assets/img/collect/grapes.png"), (540, 540), 5),
-    Item(5, pygame.image.load("assets/img/collect/pineapple.png"), (540, 540), 15),
-    Item(5, pygame.image.load("assets/img/collect/cherry.png"), (540, 540), 30)
+    Item(5, pygame.image.load("assets/img/collect/grapes.png"), (540, 540), 5, 5, False),
+    Item(5, pygame.image.load("assets/img/collect/pineapple.png"), (540, 540), 15, 10, False),
+    Item(5, pygame.image.load("assets/img/collect/cherry.png"), (540, 540), 30, 0, True)
 ]
 
 #
