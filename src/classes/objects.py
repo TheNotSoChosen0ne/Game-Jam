@@ -7,7 +7,7 @@ class Item():
 
     def __init__(self, points : float, image, center, respawn_time : int, reducer : int, freezing : bool):
         self.points = points
-        self.image = image
+        self.image = pygame.transform.scale(image, (80, 80))
         self.rotation = 0
         self.speed = 2
         self.pos = pygame.Vector2(random.randint(150, 940), random.randint(200, 890))
@@ -21,9 +21,9 @@ class Item():
         self.freeze_log = True
         return
 
-    def update(self, stress : StressBar):
+    def update(self):
         elapsed = float(time.time() - self.start_time)
-        if self.state == "collected" and self.freezing and elapsed > 6 and self.freeze_log:
+        if self.state == "collected" and self.freezing and elapsed > 10 and self.freeze_log:
             #stress.freeze(False)
             self.freeze_log = False
             pass
