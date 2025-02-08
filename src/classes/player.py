@@ -3,11 +3,12 @@ from src.classes.inventory import *
 
 class Player(Sprite):
     
-    def __init__(self, name: str, spritesheet, frame_width: int, frame_height: int, num_frames: int, pos_x: int, pos_y: int):
-        super().__init__(spritesheet, frame_width, frame_height, num_frames, pos_x, pos_y)
+    def __init__(self, name: str, spritesheet, frame_width: int, frame_height: int, num_frames: int, pos_x: int, pos_y: int, delay : int):
+        super().__init__(spritesheet, frame_width, frame_height, num_frames, pos_x, pos_y, delay)
         self.name = name
-        self.movable = False
+        self.movable = True
         self.inventory = Inventory()
+        self.speed = 30
         return
     
     def move(self, keys):

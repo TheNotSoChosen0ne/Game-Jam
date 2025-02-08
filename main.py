@@ -15,10 +15,11 @@ import pygame
 import time
 
 # PLAYER INIT
+player = Player("Stellan Voss", pygame.image.load("img/sprites/37707_female_front.png"), 16, 32, 1, 100, 100, 1)
 
 # ROOMS INIT
 rooms = {
-    "office": Room(pygame.image.load("img/empty_room.png"), [], []),
+    "office": Room(pygame.image.load("img/empty_dark_room.png"), [], []),
     "carter_house": Room(pygame.image.load("img/room1.jpeg"), [], [])
 }
 
@@ -47,7 +48,7 @@ menu.addButton(creditButton)
 
 # GAME INIT
 
-game = Game(None, rooms, menu)
+game = Game(player, rooms, menu)
 
 def main():
 
@@ -65,6 +66,8 @@ def main():
             window.checkEvents(event)
             if game.menu.active:
                 game.menu.handle_event(event)
+            elif game.menu.active == False and game.menu.credits == False:
+                game.player.move(pygame.key.get_pressed())
 
 
         # Print credits
@@ -81,6 +84,7 @@ def main():
 
         # The game
         elif not game.menu.active:
+            window.screen.fill(BLACK)
             game.runGame(window.screen)
 
         window.screen.blit(frames, (0, 0))

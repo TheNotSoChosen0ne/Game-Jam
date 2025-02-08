@@ -33,5 +33,7 @@ class Game():
     
     def runGame(self, screen):
         self.rooms[self.actual_room].draw(screen)
+        self.player.update()
+        self.player.draw(screen)
         return
 
