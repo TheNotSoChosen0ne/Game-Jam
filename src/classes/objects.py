@@ -5,7 +5,7 @@ from src.classes.stress_bar import *
 
 class Item():
 
-    def __init__(self, points : float, image, center):
+    def __init__(self, points : float, image, center, respawn_time : int):
         self.points = points
         self.image = image
         self.rotation = 0
@@ -15,10 +15,11 @@ class Item():
         self.offset = self.pos - self.center
         self.state = "collected"
         self.start_time = 0.0
+        self.respawn_time = respawn_time
         return
 
     def update(self):
-        if self.state == "collected" and time.time() - self.start_time > 3.0:
+        if self.state == "collected" and time.time() - self.start_time > self.respawn_time:
             self.state = "spawned"
 
     def startClock(self):
@@ -39,11 +40,15 @@ class Item():
         screen.blit(rotated_image, sprite_rect.topleft)
         return
 
+    def randomize(self):
+        pass
+
     def collect(self, player : Player, stress_bar : StressBar):
         keys = pygame.key.get_pressed()
         if player.position.distance_to(self.pos) < 60 and self.state == "spawned":
             if keys[pygame.K_e]:
                 self.state = "collected"
                 stress_bar.change_stress(-5)
+                self.randomize()
                 self.startClock()
 
