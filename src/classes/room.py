@@ -1,5 +1,7 @@
+from src.classes.game import Game
 from src.classes.sprites import *
 from src.classes.game import *
+import pygame
 
 class Door(StaticSprite):
     
@@ -20,3 +22,6 @@ class Room():
         self.objects = objects
         self.doors = doors
         return
+    
+    def draw(self, screen):
+        screen.blit(self.sprite, (0, 0))

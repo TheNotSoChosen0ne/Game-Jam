@@ -22,31 +22,34 @@ rooms = {
     "carter_house": Room(pygame.image.load("img/room1.jpeg"), [], [])
 }
 
+window = Window((1920, 1080), "img/room2.jpeg", 30, "You are a Detective and you look for clues because there was a crime and you have to find the culprit")
+window.initWindow()
+window.setBackground()
+window.setFont("pixel_font.otf", 42)
+
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (175, 255, 175)
+
+imageStartButton = (
+    pygame.image.load("img/Buttons_Pixel_Animation_Pack/play/343px/play01.png"),
+    pygame.image.load("img/Buttons_Pixel_Animation_Pack/play/343px/play03.png")
+)
+imageCreditButton = (
+    pygame.image.load("img/Buttons_Pixel_Animation_Pack/about/343px/about01.png"),
+    pygame.image.load("img/Buttons_Pixel_Animation_Pack/about/343px/about03.png")
+)
+startButton = ImageButton(imageStartButton[0], imageStartButton[1], 1920 / 2 - 395, 200, "start")
+creditButton = ImageButton(imageCreditButton[0], imageCreditButton[1], 1920 / 2 - 395, 600, "credits")
+menu = Menu()
+menu.addButton(startButton)
+menu.addButton(creditButton)
+
 # GAME INIT
 
+game = Game(None, rooms, menu)
+
 def main():
-    window = Window((1920, 1080), "img/room2.jpeg", 30, "You are a Detective and you look for clues because there was a crime and you have to find the culprit")
-    window.initWindow()
-    window.setBackground()
-    window.setFont("pixel_font.otf", 42)
-
-    WHITE = (255, 255, 255)
-    BLACK = (0, 0, 0)
-    RED = (175, 255, 175)
-
-    imageStartButton = (
-        pygame.image.load("img/Buttons_Pixel_Animation_Pack/play/343px/play01.png"),
-        pygame.image.load("img/Buttons_Pixel_Animation_Pack/play/343px/play03.png")
-    )
-    imageCreditButton = (
-        pygame.image.load("img/Buttons_Pixel_Animation_Pack/about/343px/about01.png"),
-        pygame.image.load("img/Buttons_Pixel_Animation_Pack/about/343px/about03.png")
-    )
-    startButton = ImageButton(imageStartButton[0], imageStartButton[1], 1920 / 2 - 395, 200, "start")
-    creditButton = ImageButton(imageCreditButton[0], imageCreditButton[1], 1920 / 2 - 395, 600, "credits")
-    menu = Menu()
-    menu.addButton(startButton)
-    menu.addButton(creditButton)
 
     window.startClock()
     while window.running:
@@ -60,25 +63,25 @@ def main():
         # Check events
         for event in pygame.event.get():
             window.checkEvents(event)
-            if menu.active:
-                menu.handle_event(event)
+            if game.menu.active:
+                game.menu.handle_event(event)
 
 
         # Print credits
-        if menu.credits:
+        if game.menu.credits:
             credits(window.screen, window.clock)
             menu.credits = False
             menu.active = True
             menu.activeIndex = 0
 
         # Print the menu
-        elif menu.active:
+        elif game.menu.active:
             window.screen.blit(window.backgrnd, (0, 0))
-            menu.draw(window.screen)
+            game.menu.draw(window.screen)
 
         # The game
-        elif not menu.active:
-            window.screen.fill((0, 0, 0)) # Make the screen full black
+        elif not game.menu.active:
+            game.runGame(window.screen)
 
         window.screen.blit(frames, (0, 0))
         window.screen.blit(logtime, (0, 30))
