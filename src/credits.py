@@ -3,7 +3,7 @@ import pygame
 def credits(screen, clock, fps=30):
     pygame.mixer.init()
     pygame.mixer.music.load("music/credits.mp3")
-    pygame.mixer.music.play()
+    pygame.mixer.music.play(-1)
 
     original_img = pygame.image.load("img/credits.jpg").convert()
     original_img = pygame.transform.scale(original_img, (screen.get_width(), screen.get_height()))
@@ -51,7 +51,7 @@ def credits(screen, clock, fps=30):
         # Affichage des crédits
         for i, surface in enumerate(credit_surfaces):
             screen.blit(surface, (screen.get_width() // 2 - surface.get_width() // 2, credit_y + i * 40))
-        
+
         credit_y -= credit_speed
         if credit_y + len(credit_surfaces) * 40 < 0:
             credit_y = screen.get_height()
