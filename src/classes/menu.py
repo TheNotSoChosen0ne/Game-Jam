@@ -1,10 +1,9 @@
 import pygame
 
 class ImageButton():
-    def __init__(self, image, pos_x : float, pos_y : float, callback):
+    def __init__(self, image, pos_x : float, pos_y : float):
         self.image = image
         self.pos = (pos_x, pos_y)
-        self.callback = callback
         self.selected = False
         return
 
@@ -12,9 +11,6 @@ class ImageButton():
         screen.blit(self.image, self.pos)
         return
 
-    def click(self):
-        self.callback()
-        return
 
 class Menu():
     def __init__(self, buttons : list):

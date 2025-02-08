@@ -19,3 +19,12 @@ class Sprites():
 
     def draw(self, screen):
         screen.blit(self.image, self.position)
+
+class StaticSprite():
+
+    def __init__(self, image, pos_x, pos_y):
+        self.image = image
+        self.position = (pos_x, pos_y)
+
+    def draw(self, screen):
+        screen.blit(self.image, self.position)
