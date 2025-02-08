@@ -15,8 +15,6 @@ def credits(screen, clock, fps=30):
     font = pygame.font.Font("assets/font/pixel_font.otf", 42)
 
     credits = [
-        "Script: Loann Badina",
-        "",
         "Art:",
         "Nicolas Bach",
         "Yanis With",
@@ -26,10 +24,11 @@ def credits(screen, clock, fps=30):
         "Loann Badina",
         "Corentin Pasquier",
         "Nicolas Bach",
+        "Yanis With",
         "Thibaut Musslin (il a juste fait ce système de crédits",
         "mais ne les a pas écrit, donc acte de présence somme toute)",
         "",
-        "Audio Engineer: Thibaut Musslin <3",
+        "Audio Engineer: Thibaut Musslin",
         "",
         "Yanis With: Bonsoir jeune aventurier, veux-tu faire la quête du forgeron ?",
         "",
