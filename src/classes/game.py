@@ -9,7 +9,7 @@ DAY = 1
 NIGHT = 0
 
 class Game():
-    def __init__(self, player : Player, rooms : list["Room"], menu : Menu):
+    def __init__(self, player : Player, rooms, menu : Menu):
         self.actual_room = "office"
         self.rooms = rooms
         self.player = player
