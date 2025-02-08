@@ -15,7 +15,6 @@ import pygame
 import time
 
 # PLAYER INIT
-player_character = Player("Stellan Voss", None, 0, 0, 0, 540, 540)
 
 # ROOMS INIT
 rooms = {
@@ -24,7 +23,6 @@ rooms = {
 }
 
 # GAME INIT
-game = Game(player_character, rooms)
 
 def main():
     window = Window((1920, 1080), "img/room2.jpeg", 30, "You are a Detective and you look for clues because there was a crime and you have to find the culprit")
@@ -44,8 +42,8 @@ def main():
         pygame.image.load("img/Buttons_Pixel_Animation_Pack/about/343px/about01.png"),
         pygame.image.load("img/Buttons_Pixel_Animation_Pack/about/343px/about03.png")
     )
-    startButton = ImageButton(imageStartButton[0], imageStartButton[1], 1920 / 2, 1080 / 2, "start")
-    creditButton = ImageButton(imageCreditButton[0], imageCreditButton[1], 1920 / 2, 1080 / 2 + 200, "credits")
+    startButton = ImageButton(imageStartButton[0], imageStartButton[1], 1920 / 2 - 395, 200, "start")
+    creditButton = ImageButton(imageCreditButton[0], imageCreditButton[1], 1920 / 2 - 395, 600, "credits")
     menu = Menu()
     menu.addButton(startButton)
     menu.addButton(creditButton)
