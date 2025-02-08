@@ -28,3 +28,10 @@ class Fruit():
         sprite_rect = rotated_image.get_rect(center=self.pos)
         screen.blit(rotated_image, sprite_rect.topleft)
         return
+
+    def collect(self, player):
+        keys = pygame.key.get_pressed()
+        if player.position.distance_to(self.pos) < 100:
+            if keys[pygame.K_e]:
+                return True
+        return False

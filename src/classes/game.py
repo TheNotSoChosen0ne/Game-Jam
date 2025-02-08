@@ -32,8 +32,16 @@ class Game():
         return
     
     def runGame(self, screen):
+        self.fillFruits()
+        self.rooms[self.actual_room].rotate()
+        self.player.rotate()
         self.rooms[self.actual_room].draw(screen)
-        self.player.update()
+        for fruit in self.fruits:
+            fruit.rotate()
+            if fruit.collect(self.player):
+                self.fruits.remove(fruit)
+            else:
+                fruit.draw(screen)
         self.player.draw(screen)
         return
 
