@@ -18,6 +18,10 @@ Pour exécuter le jeu localement, suivez ces étapes :
     ```sh
     sudo apt install python3-pygame
     ```
+    Pour Archlinux:
+    ```sh
+    sudo pacman -S python-pygame
+    ```
 4. Exécutez le jeu :
     ```sh
     ./launcher
