@@ -96,7 +96,7 @@ def main():
 
         # Print credits
         if game.menu.credits:
-            credits(window.screen, window.clock)
+            credits(window.screen, game.clock)
             menu.credits = False
             menu.active = True
             menu.activeIndex = 0
