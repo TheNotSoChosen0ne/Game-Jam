@@ -22,7 +22,7 @@ class Room:
         self.doors = doors
         self.position = pygame.Vector2(x, y)
         self.angle = 0
-        self.rotation_speed = 2
+        self.rotation_speed = 3
         self.rotation_direction = 1  # Toujours tourner dans le même sens
 
     def draw(self, screen):

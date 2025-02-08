@@ -68,13 +68,16 @@ music_menu.play_music()
 
 # FRUIT INIT
 fruits = [
-    Item(5, pygame.image.load("assets/img/collect/grapes.png"), (540, 540)),
-    Item(5, pygame.image.load("assets/img/collect/pineapple.png"), (540, 540)),
-    Item(5, pygame.image.load("assets/img/collect/cherry.png"), (540, 540))
+    Item(5, pygame.image.load("assets/img/collect/green_pill.png"), (540, 540), 5, 5, False),
+    Item(5, pygame.image.load("assets/img/collect/red_pill.png"), (540, 540), 15, 10, False),
+    Item(5, pygame.image.load("assets/img/collect/blue_pill.png"), (540, 540), 30, 0, True)
 ]
 
-#
+# MOUSE
 pygame.mouse.set_visible(False)
+
+# STRESS BAR
+
 stress_bar = StressBar(x=1730, y=220)
 
 # GAME INIT

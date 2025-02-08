@@ -5,9 +5,9 @@ from src.classes.stress_bar import *
 
 class Item():
 
-    def __init__(self, points : float, image, center):
+    def __init__(self, points : float, image, center, respawn_time : int, reducer : int, freezing : bool):
         self.points = points
-        self.image = image
+        self.image = pygame.transform.scale(image, (80, 80))
         self.rotation = 0
         self.speed = 2
         self.pos = pygame.Vector2(random.randint(150, 940), random.randint(200, 890))
@@ -15,10 +15,19 @@ class Item():
         self.offset = self.pos - self.center
         self.state = "collected"
         self.start_time = 0.0
+        self.respawn_time = respawn_time
+        self.reducer = reducer
+        self.freezing = freezing
+        self.freeze_log = True
         return
 
     def update(self):
-        if self.state == "collected" and time.time() - self.start_time > 3.0:
+        elapsed = float(time.time() - self.start_time)
+        if self.state == "collected" and self.freezing and elapsed > 10 and self.freeze_log:
+            #stress.freeze(False)
+            self.freeze_log = False
+            pass
+        if self.state == "collected" and elapsed > self.respawn_time:
             self.state = "spawned"
 
     def startClock(self):
@@ -39,11 +48,17 @@ class Item():
         screen.blit(rotated_image, sprite_rect.topleft)
         return
 
+    def randomize(self):
+        self.pos = pygame.Vector2(random.randint(150, 940), random.randint(200, 890))
+
     def collect(self, player : Player, stress_bar : StressBar):
         keys = pygame.key.get_pressed()
         if player.position.distance_to(self.pos) < 60 and self.state == "spawned":
             if keys[pygame.K_e]:
                 self.state = "collected"
-                stress_bar.change_stress(-5)
+                stress_bar.change_stress(-self.reducer)
+                #stress_bar.freeze(True)
+                self.freeze_log = True
+                self.randomize()
                 self.startClock()
 

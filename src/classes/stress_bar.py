@@ -66,11 +66,15 @@ class StressBar:
 
         # Draw the stress bar (grows upwards)
         pygame.draw.rect(screen, self.color,
-                         (self.x, self.y + self.height - filled_height, self.width, filled_height))
+                                 (self.x, self.y + self.height - filled_height, self.width, filled_height))
 
         pygame.draw.rect(screen, (255, 255, 0), (self.x, self.y, self.width, self.height), 3)
-        stress_text = f"{self.current_stress:.0f}%"
-        text_surface = self.font.render(stress_text, 1, (255, 255, 255))  # White
-        text_x = self.x + (self.width // 2) - (text_surface.get_width() // 2)
-        text_y = self.y - 35  # Position above the bar
-        screen.blit(text_surface, (text_x, text_y))
+
+        stress_label = self.font.render("Stress:", True, (255, 255, 255))
+        stress_x = self.x + (self.width // 2) - (stress_label.get_width() // 2)
+        stress_y = self.y - 70
+        stress_value = self.font.render(f"{self.current_stress:.0f}%", True, (255, 255, 255))
+        value_x = self.x + (self.width // 2) - (stress_value.get_width() // 2)
+        value_y = self.y - 35
+        screen.blit(stress_label, (stress_x, stress_y))
+        screen.blit(stress_value, (value_x, value_y))

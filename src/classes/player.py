@@ -27,7 +27,7 @@ class Player:
         self.speed = 30
         self.angle = 0  # En degrés, 0° signifie que la tête pointe vers le haut
         self.rotation_speed = 2
-        self.rotation_direction = 1  # 1 pour horaire, -1 pour anti-horaire
+        self.rotation_direction = -1  # 1 pour horaire, -1 pour anti-horaire
 
     def update(self):
         """Met à jour l’animation."""
