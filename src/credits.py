@@ -5,7 +5,7 @@ def credits(screen, clock, fps=30):
     pygame.mixer.music.load("assets/music/credits.mp3")
     pygame.mixer.music.play(-1)
 
-    original_img = pygame.image.load("assets/img/credits.jpg").convert()
+    original_img = pygame.image.load("assets/img/background/credits.jpg").convert()
     original_img = pygame.transform.scale(original_img, (screen.get_width(), screen.get_height()))
     img = original_img.copy()
     angle = 0
