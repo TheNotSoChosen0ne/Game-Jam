@@ -51,15 +51,18 @@ def main():
             if menu.active:
                 menu.handle_event(event)
 
-        # Print the menu
-        if menu.active:
-            window.screen.blit(window.backgrnd, (0, 0))
-            menu.draw(window.screen)
 
         # Print credits
-        elif menu.credits:
+        if menu.credits:
             credits(window.screen, window.clock)
             menu.credits = False
+            menu.active = True
+            menu.activeIndex = 0
+
+        # Print the menu
+        elif menu.active:
+            window.screen.blit(window.backgrnd, (0, 0))
+            menu.draw(window.screen)
 
         # The game
         elif not menu.active:

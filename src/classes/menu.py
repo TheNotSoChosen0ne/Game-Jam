@@ -1,7 +1,7 @@
 import pygame
 
 class ImageButton():
-    def __init__(self, imageActive, imageInactive, pos_x : float, pos_y : float, type : str):
+    def __init__(self, imageInactive, imageActive, pos_x : float, pos_y : float, type : str):
         self.imageActive = imageActive
         self.imageInactive = imageInactive
         self.image = self.imageActive
@@ -27,8 +27,12 @@ class Menu():
         return
 
     def draw(self, screen):
-        for button in self.buttons:
-            button.draw(screen)
+        for i in range(len(self.buttons)):
+            if i == self.activeIndex:
+                self.buttons[i].image = self.buttons[i].imageActive
+            else:
+                self.buttons[i].image = self.buttons[i].imageInactive
+            self.buttons[i].draw(screen)
         return
 
     def handle_event(self, event):
@@ -37,13 +41,27 @@ class Menu():
                 if button.imageRect.collidepoint(event.pos):
                     if button.type == "credits":
                         self.credits = True
+                        self.active = False
                     elif button.type == "start":
                         self.active = False
-                    return True
-        elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-            if self.buttons[self.activeIndex].type == "start":
-                self.active = False
-            elif self.buttons[self.activeIndex].type == "credits":
-                self.credits = True
-            return True
-        return False
+                    return
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                if self.buttons[self.activeIndex].type == "start":
+                    self.active = False
+                elif self.buttons[self.activeIndex].type == "credits":
+                    self.credits = True
+                    self.active = False
+            if event.key == pygame.K_DOWN:
+                self.activeIndex += 1
+                if self.activeIndex == len(self.buttons):
+                    self.activeIndex = 0
+                elif self.activeIndex == -1:
+                    self.activeIndex = len(self.buttons) - 1
+            if event.key == pygame.K_UP:
+                self.activeIndex -= 1
+                if self.activeIndex == len(self.buttons):
+                    self.activeIndex = 0
+                elif self.activeIndex == -1:
+                    self.activeIndex = len(self.buttons) - 1
+        return
