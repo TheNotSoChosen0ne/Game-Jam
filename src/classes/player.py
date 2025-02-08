@@ -25,7 +25,7 @@ class Player(Sprite):
 
         if keys[pygame.K_LEFT] and x >= 130:
             x -= self.speed
-        if keys[pygame.K_RIGHT] and x <= 400:
+        if keys[pygame.K_RIGHT] and x <= 880:
             x += self.speed
         if keys[pygame.K_UP] and y >= 250:
             y -= self.speed

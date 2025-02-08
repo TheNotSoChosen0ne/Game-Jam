@@ -53,7 +53,6 @@ class Menu():
                     self.credits = True
                     self.active = False
                 elif self.buttons[self.activeIndex].type == "quit":
-                    self.active = False
                     self.credits = False
                     window.running = False
             if event.key == pygame.K_DOWN:
