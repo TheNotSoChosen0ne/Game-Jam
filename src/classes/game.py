@@ -47,7 +47,7 @@ class Game():
         self.rooms[self.actual_room].draw(screen)
         for item in self.items:
             item.rotate()
-            item.update()
+            item.update(self.stress)
             item.collect(self.player, self.stress)    
             item.draw(screen)
         self.player.draw(screen)
