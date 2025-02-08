@@ -1,14 +1,15 @@
 import pygame
+import random
 from src.classes.player import Player
 
 class Fruit():
 
-    def __init__(self, points : float, image, pos : tuple, rotation : float, center):
+    def __init__(self, points : float, image, center):
         self.points = points
         self.image = image
-        self.rotation = rotation
+        self.rotation = 0
         self.speed = 2
-        self.pos = pygame.Vector2(pos[0], pos[1])
+        self.pos = pygame.Vector2(random.randint(150, 940), random.randint(200, 890))
         self.center = center
         self.offset = self.pos - self.center
         return

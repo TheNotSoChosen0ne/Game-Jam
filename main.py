@@ -61,13 +61,15 @@ menu.addButton(startButton)
 menu.addButton(creditButton)
 menu.addButton(quitButton)
 
-# # FRUIT INIT
-# fruits = [
-#     Fruit(5, pygame.image.load())
-# ]
+# FRUIT INIT
+fruits = [
+    Fruit(5, pygame.image.load("assets/img/collect/grapes.png"), (540, 540)),
+    Fruit(5, pygame.image.load("assets/img/collect/pineapple.png"), (540, 540)),
+    Fruit(5, pygame.image.load("assets/img/collect/cherry.png"), (540, 540))
+]
 
 # GAME INIT
-game = Game(player, rooms, menu, [])
+game = Game(player, rooms, menu, fruits)
 
 # MAIN LOOP
 def main():
