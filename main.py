@@ -24,7 +24,7 @@ player = Player("Stellan Voss", pygame.image.load("assets/img/sprite_detective/d
 
 # ROOMS INIT
 rooms = {
-    "office": Room(pygame.image.load("assets/img/assets/empty_dark_room.png"), [], [], 540, 540),
+    "office": Room(pygame.image.load("assets/img/rooms/office_filled.png"), [], [], 540, 540),
     "carter_house": Room(pygame.image.load("assets/img/background/room1.jpeg"), [], [], 540, 540)
 }
 
@@ -59,7 +59,7 @@ menu.addButton(quitButton)
 
 # GAME INIT
 
-game = Game(player, rooms, menu)
+game = Game(player, rooms, menu, [])
 
 def main():
 

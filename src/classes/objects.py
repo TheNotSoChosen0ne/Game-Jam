@@ -1,6 +1,7 @@
 import pygame
+from src.classes.player import Player
 
-class Fruits():
+class Fruit():
 
     def __init__(self, points : float, image, pos : tuple, rotation : float, center):
         self.points = points
@@ -11,6 +12,9 @@ class Fruits():
         self.center = center
         self.offset = self.pos - self.center
         return
+
+    def update(player : Player):
+        pass
 
     def rotate(self):
         dangle = self.speed
