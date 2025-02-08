@@ -6,21 +6,26 @@ from src.classes.room import *
 from src.classes.player import *
 from src.classes.menu import *
 from src.classes.window import *
-from src.classes.objects import Fruit
+from src.classes.objects import Item
 
 DAY = 1
 NIGHT = 0
 
 class Game():
-    def __init__(self, player : Player, rooms : list["Room"], menu : Menu, fruits : list["Fruit"]):
+    def __init__(self, player : Player, rooms : list["Room"], menu : Menu, items : list["Item"]):
+        self.start_time = time.time()
+        self.clock = pygame.time.Clock()
         self.actual_room = "office"
         self.rooms = rooms
         self.player = player
         self.cycle = DAY
         self.menu = menu
-        self.fruits = fruits
+        self.items = items
         self.font = pygame.font.Font("assets/font/pixel_font.otf", 42)
-        self.time = pygame.time.Clock()
+        return
+
+    def startClock(self):
+        self.clock = pygame.time.Clock()
         return
 
     def switchTime(self):
@@ -38,11 +43,11 @@ class Game():
         self.rooms[self.actual_room].rotate()
         self.player.rotate()
         self.rooms[self.actual_room].draw(screen)
-        for fruit in self.fruits:
-            fruit.rotate()
-            fruit.update()
-            fruit.collect(self.player)    
-            fruit.draw(screen)
+        for item in self.items:
+            item.rotate()
+            item.update()
+            item.collect(self.player)    
+            item.draw(screen)
         self.player.draw(screen)
         return
 

@@ -10,7 +10,7 @@ from src.classes.objects import *
 from src.classes.menu import *
 from src.classes.window import *
 from src.classes.room import *
-from src.classes.game import *
+from src.classes.game import Game
 from src.credits import *
 from random import *
 
@@ -63,10 +63,14 @@ menu.addButton(quitButton)
 
 # FRUIT INIT
 fruits = [
-    Fruit(5, pygame.image.load("assets/img/collect/grapes.png"), (540, 540)),
-    Fruit(5, pygame.image.load("assets/img/collect/pineapple.png"), (540, 540)),
-    Fruit(5, pygame.image.load("assets/img/collect/cherry.png"), (540, 540))
+    Item(5, pygame.image.load("assets/img/collect/grapes.png"), (540, 540)),
+    Item(5, pygame.image.load("assets/img/collect/pineapple.png"), (540, 540)),
+    Item(5, pygame.image.load("assets/img/collect/cherry.png"), (540, 540))
 ]
+
+#
+pygame.mouse.set_visible(False)
+stress_bar = StressBar(x=1730, y=220)
 
 # GAME INIT
 game = Game(player, rooms, menu, fruits)
@@ -74,17 +78,12 @@ game = Game(player, rooms, menu, fruits)
 # MAIN LOOP
 def main():
 
-    pygame.mouse.set_visible(False)
-    window.startClock()
-    stress_bar = StressBar(x=1730, y=220)
     first_start = 0
     while window.running:
 
-        window.clock.tick(window.fps)
+        game.clock.tick(window.fps)
 
-        frames = window.font.render("fps: " + str(int(window.clock.get_fps())), 1, WHITE)
-        current = time.time()
-        logtime = window.font.render("time: " + str(int(current - window.startTime)), 1, WHITE)
+        frames = window.font.render("fps: " + str(int(game.clock.get_fps())), 1, WHITE)
 
         # Check events
         for event in pygame.event.get():
@@ -111,6 +110,7 @@ def main():
             window.screen.fill(BLACK)
             game.runGame(window.screen)
             stress_bar.start()
+            game.startClock()
             first_start = 1
 
         elif not game.menu.active:
@@ -119,9 +119,7 @@ def main():
             stress_bar.update()
             stress_bar.draw(window.screen)
 
-
         window.screen.blit(frames, (0, 0))
-        window.screen.blit(logtime, (0, 30))
 
         window.refresh()
 
