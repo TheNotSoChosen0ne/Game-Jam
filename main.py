@@ -74,7 +74,7 @@ def main():
 
     pygame.mouse.set_visible(False)
     window.startClock()
-    stress_bar = StressBar(x=1000, y=0)
+    stress_bar = StressBar(x=1730, y=220)
     first_start = 0
     while window.running:
 
