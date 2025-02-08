@@ -5,12 +5,26 @@ from src.classes.inventory import *
 from src.classes.objects import *
 from src.classes.menu import *
 from src.classes.window import *
+from src.classes.room import *
+from src.classes.game import *
 from src.credits import *
 from random import *
 from math import *
 import os.path
 import pygame
 import time
+
+# PLAYER INIT
+player_character = Player("Stellan Voss", None, 0, 0, 0, 540, 540)
+
+# ROOMS INIT
+rooms = {
+    "office": Room(pygame.image.load("img/empty_room.png"), [], []),
+    "carter_house": Room(pygame.image.load("img/room1.jpeg"), [], [])
+}
+
+# GAME INIT
+game = Game(player_character, rooms)
 
 def main():
     window = Window((1920, 1080), "img/room2.jpeg", 30, "You are a Detective and you look for clues because there was a crime and you have to find the culprit")
@@ -51,15 +65,18 @@ def main():
             if menu.active:
                 menu.handle_event(event)
 
-        # Print the menu
-        if menu.active:
-            window.screen.blit(window.backgrnd, (0, 0))
-            menu.draw(window.screen)
 
         # Print credits
-        elif menu.credits:
+        if menu.credits:
             credits(window.screen, window.clock)
             menu.credits = False
+            menu.active = True
+            menu.activeIndex = 0
+
+        # Print the menu
+        elif menu.active:
+            window.screen.blit(window.backgrnd, (0, 0))
+            menu.draw(window.screen)
 
         # The game
         elif not menu.active:
