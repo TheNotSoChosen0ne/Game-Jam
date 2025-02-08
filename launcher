@@ -1,3 +1,4 @@
 #!/usr/bin/bash
 
-PYGAME_DETECT_AVX2=1 python3 main.py 2> /dev/null
+export PYGAME_DETECT_AVX2=1
+./main.py 2> /dev/null

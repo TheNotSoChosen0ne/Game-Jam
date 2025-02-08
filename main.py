@@ -19,34 +19,42 @@ import pygame
 import time
 
 # PLAYER INIT
-player = Player("Stellan Voss", pygame.image.load("img/sprites/37707_female_front.png"), 16, 32, 1, 100, 250, 1)
+player = Player(
+    "Stellan Voss",
+    {
+        "back": pygame.image.load("assets/img/sprite_detective/detective_back.png"),
+        "front": pygame.image.load("assets/img/sprite_detective/detective_front.png"),
+        "left": pygame.image.load("assets/img/sprite_detective/detective_back.png"),
+        "right": pygame.image.load("assets/img/sprite_detective/detective_back.png"),
+    },
+    16, 32, 1, 100, 250, 1)
 
 # ROOMS INIT
 rooms = {
-    "office": Room(pygame.image.load("img/empty_dark_room.png"), [], []),
-    "carter_house": Room(pygame.image.load("img/room1.jpeg"), [], [])
+    "office": Room(pygame.image.load("assets/img/empty_dark_room.png"), [], []),
+    "carter_house": Room(pygame.image.load("assets/img/room1.jpeg"), [], [])
 }
 
-window = Window((1920, 1080), "img/room2.jpeg", 30, "You are a Detective and you look for clues because there was a crime and you have to find the culprit")
+window = Window((1920, 1080), "assets/img/room2.jpeg", 30, "You are a Detective and you look for clues because there was a crime and you have to find the culprit")
 window.initWindow()
 window.setBackground()
-window.setFont("pixel_font.otf", 42)
+window.setFont("assets/font/pixel_font.otf", 42)
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (175, 255, 175)
 
 imageStartButton = (
-    pygame.image.load("img/Buttons_Pixel_Animation_Pack/play/343px/play01.png"),
-    pygame.image.load("img/Buttons_Pixel_Animation_Pack/play/343px/play03.png")
+    pygame.image.load("assets/img/Buttons_Pixel_Animation_Pack/play/343px/play01.png"),
+    pygame.image.load("assets/img/Buttons_Pixel_Animation_Pack/play/343px/play03.png")
 )
 imageCreditButton = (
-    pygame.image.load("img/Buttons_Pixel_Animation_Pack/about/343px/about01.png"),
-    pygame.image.load("img/Buttons_Pixel_Animation_Pack/about/343px/about03.png")
+    pygame.image.load("assets/img/Buttons_Pixel_Animation_Pack/about/343px/about01.png"),
+    pygame.image.load("assets/img/Buttons_Pixel_Animation_Pack/about/343px/about03.png")
 )
 imageQuitButton = (
-    pygame.image.load("img/Buttons_Pixel_Animation_Pack/back/343px/back01.png"),
-    pygame.image.load("img/Buttons_Pixel_Animation_Pack/back/343px/back03.png")
+    pygame.image.load("assets/img/Buttons_Pixel_Animation_Pack/back/343px/back01.png"),
+    pygame.image.load("assets/img/Buttons_Pixel_Animation_Pack/back/343px/back03.png")
 )
 startButton = ImageButton(imageStartButton[0], imageStartButton[1], 1920 / 2 - 395, 100, "start")
 creditButton = ImageButton(imageCreditButton[0], imageCreditButton[1], 1920 / 2 - 395, 400, "credits")
