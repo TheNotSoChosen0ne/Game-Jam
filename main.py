@@ -22,10 +22,19 @@ def main():
     BLACK = (0, 0, 0)
     RED = (175, 255, 175)
 
-    imageStartButton = pygame.image.load("./img/Modern_UI_Pack/Buttons/Normal/Play.png")
-    startButton = ImageButton(imageStartButton, 1920 / 2, 1080 / 2)
+    imageStartButton = (
+        pygame.image.load("img/Buttons_Pixel_Animation_Pack/play/343px/play01.png"),
+        pygame.image.load("img/Buttons_Pixel_Animation_Pack/play/343px/play03.png")
+    )
+    imageCreditButton = (
+        pygame.image.load("img/Buttons_Pixel_Animation_Pack/about/343px/about01.png"),
+        pygame.image.load("img/Buttons_Pixel_Animation_Pack/about/343px/about03.png")
+    )
+    startButton = ImageButton(imageStartButton[0], imageStartButton[1], 1920 / 2, 1080 / 2, "start")
+    creditButton = ImageButton(imageCreditButton[0], imageCreditButton[1], 1920 / 2, 1080 / 2 + 200, "credits")
     menu = Menu()
     menu.addButton(startButton)
+    menu.addButton(creditButton)
 
     window.startClock()
     while window.running:
@@ -36,22 +45,31 @@ def main():
         current = time.time()
         logtime = window.font.render("time: " + str(int(current - window.startTime)), 1, WHITE)
 
-        window.screen.blit(window.backgrnd, (0, 0))
-        window.screen.blit(frames, (0, 0))
-        window.screen.blit(logtime, (0, 30))
-
+        # Check events
         for event in pygame.event.get():
             window.checkEvents(event)
             if menu.active:
                 menu.handle_event(event)
 
+        # Print the menu
         if menu.active:
+            window.screen.blit(window.backgrnd, (0, 0))
             menu.draw(window.screen)
+
+        # Print credits
+        elif menu.credits:
+            credits(window.screen, window.clock)
+            menu.credits = False
+
+        # The game
+        elif not menu.active:
+            window.screen.fill((0, 0, 0)) # Make the screen full black
+
+        window.screen.blit(frames, (0, 0))
+        window.screen.blit(logtime, (0, 30))
 
         window.refresh()
 
-    # Quitter
-    credits(window.screen, window.clock)
     pygame.quit()
     return
 

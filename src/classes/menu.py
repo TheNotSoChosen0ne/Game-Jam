@@ -1,10 +1,13 @@
 import pygame
 
 class ImageButton():
-    def __init__(self, image, pos_x : float, pos_y : float):
-        self.image = image
+    def __init__(self, imageActive, imageInactive, pos_x : float, pos_y : float, type : str):
+        self.imageActive = imageActive
+        self.imageInactive = imageInactive
+        self.image = self.imageActive
         self.pos = (pos_x, pos_y)
         self.imageRect = self.image.get_rect(topleft=self.pos)
+        self.type = type
         return
 
     def draw(self, screen):
@@ -16,6 +19,7 @@ class Menu():
         self.activeIndex = 0
         self.buttons = []
         self.active = True
+        self.credits = False
         return
 
     def addButton(self, button):
@@ -31,9 +35,15 @@ class Menu():
         if event.type == pygame.MOUSEBUTTONDOWN:
             for button in self.buttons:
                 if button.imageRect.collidepoint(event.pos):
-                    self.active = False
+                    if button.type == "credits":
+                        self.credits = True
+                    elif button.type == "start":
+                        self.active = False
                     return True
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-            self.active = False
+            if self.buttons[self.activeIndex].type == "start":
+                self.active = False
+            elif self.buttons[self.activeIndex].type == "credits":
+                self.credits = True
             return True
         return False
