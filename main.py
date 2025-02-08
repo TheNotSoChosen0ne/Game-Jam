@@ -23,12 +23,12 @@ def main():
 
     imageStartButton = pygame.image.load("./img/Modern_UI_Pack/Buttons/Normal/Play.png")
     startButton = ImageButton(imageStartButton, 1920 / 2, 1080 / 2)
-    menu = Menu([startButton])
+    menu = Menu()
+    menu.addButton(startButton)
 
     window.startClock()
 
     while window.running:
-        window.checkEvents()
 
         window.clock.tick(window.fps)
 
@@ -40,7 +40,13 @@ def main():
         window.screen.blit(frames, (0, 0))
         window.screen.blit(logtime, (0, 30))
 
-        menu.draw(window.screen)
+        for event in pygame.event.get():
+            window.checkEvents(event)
+            if menu.active:
+                menu.handle_event(event)
+
+        if menu.active:
+            menu.draw(window.screen)
 
         window.refresh()
 
