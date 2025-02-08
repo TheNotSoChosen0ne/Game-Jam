@@ -2,17 +2,17 @@ import pygame
 
 def credits(screen, clock, fps=30):
     pygame.mixer.init()
-    pygame.mixer.music.load("music/credits.mp3")
+    pygame.mixer.music.load("assets/music/credits.mp3")
     pygame.mixer.music.play(-1)
 
-    original_img = pygame.image.load("img/credits.jpg").convert()
+    original_img = pygame.image.load("assets/img/credits.jpg").convert()
     original_img = pygame.transform.scale(original_img, (screen.get_width(), screen.get_height()))
     img = original_img.copy()
     angle = 0
 
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
-    font = pygame.font.Font("pixel_font.otf", 42)
+    font = pygame.font.Font("assets/font/pixel_font.otf", 42)
 
     credits = [
         "Script: Loann Badina",
