@@ -57,12 +57,12 @@ def main():
             menu.draw(window.screen)
 
         # Print credits
-        if menu.credits:
+        elif menu.credits:
             credits(window.screen, window.clock)
             menu.credits = False
 
         # The game
-        if not menu.active:
+        elif not menu.active:
             window.screen.fill((0, 0, 0)) # Make the screen full black
 
         window.screen.blit(frames, (0, 0))
