@@ -1,16 +1,28 @@
 import pygame
+import random
+from src.classes.player import Player
+from src.classes.stress_bar import *
 
-class Fruits():
+class Item():
 
-    def __init__(self, points : float, image, pos : tuple, rotation : float, center):
+    def __init__(self, points : float, image, center):
         self.points = points
         self.image = image
-        self.rotation = rotation
+        self.rotation = 0
         self.speed = 2
-        self.pos = pygame.Vector2(pos[0], pos[1])
+        self.pos = pygame.Vector2(random.randint(150, 940), random.randint(200, 890))
         self.center = center
         self.offset = self.pos - self.center
+        self.state = "collected"
+        self.start_time = 0.0
         return
+
+    def update(self):
+        if self.state == "collected" and time.time() - self.start_time > 3.0:
+            self.state = "spawned"
+
+    def startClock(self):
+        self.start_time = time.time()
 
     def rotate(self):
         dangle = self.speed
@@ -20,7 +32,18 @@ class Fruits():
         return
 
     def draw(self, screen):
+        if self.state != "spawned":
+            return
         rotated_image = pygame.transform.rotate(self.image, -self.rotation)
         sprite_rect = rotated_image.get_rect(center=self.pos)
         screen.blit(rotated_image, sprite_rect.topleft)
         return
+
+    def collect(self, player : Player, stress_bar : StressBar):
+        keys = pygame.key.get_pressed()
+        if player.position.distance_to(self.pos) < 60 and self.state == "spawned":
+            if keys[pygame.K_e]:
+                self.state = "collected"
+                stress_bar.change_stress(-5)
+                self.startClock()
+

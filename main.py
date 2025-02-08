@@ -10,7 +10,7 @@ from src.classes.objects import *
 from src.classes.menu import *
 from src.classes.window import *
 from src.classes.room import *
-from src.classes.game import *
+from src.classes.game import Game
 from src.classes.music import *
 from src.credits import *
 from random import *
@@ -25,19 +25,23 @@ player = Player("Stellan Voss", pygame.image.load("assets/img/sprite_detective/d
 
 # ROOMS INIT
 rooms = {
-    "office": Room(pygame.image.load("assets/img/assets/empty_dark_room.png"), [], [], 540, 540),
+    "office": Room(pygame.image.load("assets/img/rooms/office_filled.png"), [], [], 540, 540),
     "carter_house": Room(pygame.image.load("assets/img/background/room1.jpeg"), [], [], 540, 540)
 }
 
+# WINDOW INIT
 window = Window((1920, 1080), "assets/img/background/room2.jpeg", 30, "You are a Detective and you look for clues because there was a crime and you have to find the culprit")
 window.initWindow()
 window.setBackground()
 window.setFont("assets/font/pixel_font.otf", 42)
 
+
+# COLOR INIT
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (175, 255, 175)
 
+# MENU INIT
 imageStartButton = (
     pygame.image.load("assets/img/Buttons_Pixel_Animation_Pack/play/343px/play01.png"),
     pygame.image.load("assets/img/Buttons_Pixel_Animation_Pack/play/343px/play03.png")
@@ -62,23 +66,29 @@ music_menu = Music("assets/music/MELANCHOLIA.wav")
 music_menu.load_music()
 music_menu.play_music()
 
+# FRUIT INIT
+fruits = [
+    Item(5, pygame.image.load("assets/img/collect/grapes.png"), (540, 540)),
+    Item(5, pygame.image.load("assets/img/collect/pineapple.png"), (540, 540)),
+    Item(5, pygame.image.load("assets/img/collect/cherry.png"), (540, 540))
+]
+
+#
+pygame.mouse.set_visible(False)
+stress_bar = StressBar(x=1730, y=220)
+
 # GAME INIT
+game = Game(player, rooms, menu, fruits, stress_bar)
 
-game = Game(player, rooms, menu)
-
+# MAIN LOOP
 def main():
 
-    pygame.mouse.set_visible(False)
-    window.startClock()
-    stress_bar = StressBar(x=1000, y=0)
     first_start = 0
     while window.running:
 
-        window.clock.tick(window.fps)
+        game.clock.tick(window.fps)
 
-        frames = window.font.render("fps: " + str(int(window.clock.get_fps())), 1, WHITE)
-        current = time.time()
-        logtime = window.font.render("time: " + str(int(current - window.startTime)), 1, WHITE)
+        frames = window.font.render("fps: " + str(int(game.clock.get_fps())), 1, WHITE)
 
         # Check events
         for event in pygame.event.get():
@@ -92,7 +102,7 @@ def main():
         # Print credits
         if game.menu.credits:
             music_menu.stop_music()
-            credits(window.screen, window.clock)
+            credits(window.screen, game.clock)
             menu.credits = False
             menu.active = True
             menu.activeIndex = 0
@@ -113,6 +123,7 @@ def main():
             window.screen.fill(BLACK)
             game.runGame(window.screen)
             stress_bar.start()
+            game.startClock()
             first_start = 1
 
         elif not game.menu.active:
@@ -122,9 +133,7 @@ def main():
             stress_bar.update()
             stress_bar.draw(window.screen)
 
-
         window.screen.blit(frames, (0, 0))
-        window.screen.blit(logtime, (0, 30))
 
         window.refresh()
 

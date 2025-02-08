@@ -10,8 +10,7 @@ class Window():
         self.fontPath = ""
         self.fontSize = 0
         self.running = True
-        self.startTime = time.time()
-        self.clock = pygame.time.Clock()
+        self.seconds = 0.0
         return
 
     def initWindow(self):
@@ -30,10 +29,6 @@ class Window():
         self.fontPath = path
         self.fontSize = size
         self.font = pygame.font.Font(self.fontPath, self.fontSize)
-        return
-
-    def startClock(self):
-        self.clock = pygame.time.Clock()
         return
 
     def checkEvents(self, event, menu):
