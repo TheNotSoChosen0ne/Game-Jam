@@ -58,6 +58,7 @@ game = Game(player, rooms, menu)
 
 def main():
 
+    pygame.mouse.set_visible(False)
     window.startClock()
     while window.running:
 
