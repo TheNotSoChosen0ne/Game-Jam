@@ -3,8 +3,10 @@
 from src.classes.characters import *
 from src.classes.inventory import *
 from src.classes.objects import *
+from src.classes.menu import *
 from random import *
 from math import *
+import os.path
 import pygame
 import time
 
@@ -33,6 +35,15 @@ running = True
 clock = pygame.time.Clock()
 #frame = 0
 
+# ImageButton
+imageStartButton = pygame.image.load("./img/Modern_UI_Pack/Buttons/Normal/Play.png")
+
+# Buttons
+startButton = ImageButton(imageStartButton, 1920 / 2, 1080 / 2, 0)
+
+# Menu
+menu = Menu([startButton])
+
 while running:
     clock.tick(FPS)
     for event in pygame.event.get():
@@ -51,6 +62,9 @@ while running:
     screen.blit(backgrnd, (0, 0))
     screen.blit(frames, (0, 0))
     screen.blit(logtime, (0, 30))
+
+    # Print menu
+    menu.draw(screen)
 
     # Rafraîchir l'écran
     pygame.display.flip()
