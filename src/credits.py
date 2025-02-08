@@ -22,9 +22,10 @@ def credits(screen, clock, fps=30):
         "",
         "Yanis With: Bonsoir jeune aventurier, veux-tu faire la quête du forgeron ?",
         "",
-        "Special Thanks: Mr. Guillaumat",
-        "Special Thanks: Fab",
-        "Special Thanks: Lorem Ipsum",
+        "Special Thanks:" 
+        "Mr. Guillaumat",
+        "Fab",
+        "Lorem Ipsum",
     ]
 
     credit_surfaces = [font.render(line, True, WHITE) for line in credits]
