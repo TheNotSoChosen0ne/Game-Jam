@@ -23,8 +23,8 @@ player = Player("Stellan Voss", pygame.image.load("assets/img/sprites/37707_fema
 
 # ROOMS INIT
 rooms = {
-    "office": Room(pygame.image.load("assets/img/assets/empty_dark_room.png"), [], []),
-    "carter_house": Room(pygame.image.load("assets/img/background/room1.jpeg"), [], [])
+    "office": Room(pygame.image.load("assets/img/assets/empty_dark_room.png"), [], [], 540, 540),
+    "carter_house": Room(pygame.image.load("assets/img/background/room1.jpeg"), [], [], 540, 540)
 }
 
 window = Window((1920, 1080), "assets/img/background/room2.jpeg", 30, "You are a Detective and you look for clues because there was a crime and you have to find the culprit")
