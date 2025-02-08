@@ -22,9 +22,12 @@ def main():
     RED = (175, 255, 175)
 
     imageStartButton = pygame.image.load("./img/Modern_UI_Pack/Buttons/Normal/Play.png")
+    imageCreditButton = pygame.image.load("./img/Modern_UI_Pack/Buttons/Normal/Community.png")
     startButton = ImageButton(imageStartButton, 1920 / 2, 1080 / 2)
+    creditButton = ImageButton(imageCreditButton, 1920 / 2, 1080 / 2 + 200)
     menu = Menu()
     menu.addButton(startButton)
+    menu.addButton(creditButton)
 
     window.startClock()
 
@@ -36,21 +39,23 @@ def main():
         current = time.time()
         logtime = window.font.render("time: " + str(int(current - window.startTime)), 1, WHITE)
 
-        window.screen.blit(window.backgrnd, (0, 0))
-        window.screen.blit(frames, (0, 0))
-        window.screen.blit(logtime, (0, 30))
-
         for event in pygame.event.get():
             window.checkEvents(event)
             if menu.active:
                 menu.handle_event(event)
 
         if menu.active:
+            window.screen.blit(window.backgrnd, (0, 0))
             menu.draw(window.screen)
+
+        if not menu.active:
+            window.screen.fill((0, 0, 0))
+
+        window.screen.blit(frames, (0, 0))
+        window.screen.blit(logtime, (0, 30))
 
         window.refresh()
 
-    # Quitter
     pygame.quit()
     return
 
