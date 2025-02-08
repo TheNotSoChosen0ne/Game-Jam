@@ -62,24 +62,28 @@ class Player:
             else:
                 movement += pygame.Vector2(math.sin(rad), -math.cos(rad)) * self.speed
                 self.limits[1] -= self.speed
+                #changement de sprite à faire
         if keys[pygame.K_DOWN]:
             if self.limits[1] >= 890:
                 pass
             else:
                 movement += pygame.Vector2(-math.sin(rad), math.cos(rad)) * self.speed
                 self.limits[1] += self.speed
+                #changement de sprite à faire
         if keys[pygame.K_LEFT]:
             if self.limits[0] <= 150:
                 pass
             else:
                 movement += pygame.Vector2(-math.cos(rad), -math.sin(rad)) * self.speed
                 self.limits[0] -= self.speed
+                #changement de sprite à faire
         if keys[pygame.K_RIGHT]:
             if self.limits[0] >= 940:
                 pass
             else:
                 movement += pygame.Vector2(math.cos(rad), math.sin(rad)) * self.speed
                 self.limits[0] += self.speed
+                #changement de sprite à faire
         
         self.position += movement
         # Met à jour l'offset par rapport au centre de rotation
@@ -89,7 +93,7 @@ class Player:
         """
         Fait tourner le joueur autour du centre de rotation.
         La rotation est appliquée en tournant le vecteur offset.
-        Ainsi, si le joueur est déplacé et que l'offset varie, il pourra
+        Si le joueur est déplacé et que l'offset varie, il pourra
         traverser le centre et passer de l'autre côté.
         """
         # Mise à jour de l'angle
@@ -98,5 +102,5 @@ class Player:
         
         # Faire tourner le vecteur offset
         self.offset = self.offset.rotate(delta_angle)
-        # Recalculer la position à partir du centre et du nouvel offset
+        # Recalcule de la position à partir du centre et du nouvel offset
         self.position = self.rotation_center + self.offset
