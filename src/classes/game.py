@@ -9,8 +9,8 @@ from src.classes.window import *
 from src.classes.objects import Item
 from src.classes.stress_bar import *
 
-DAY = 1
-NIGHT = 0
+ACTIVE = 1
+PASSIVE = 0
 
 class Game():
     def __init__(self, player : Player, rooms : list["Room"], menu : Menu, items : list["Item"], stress : StressBar):
@@ -19,7 +19,7 @@ class Game():
         self.actual_room = "office"
         self.rooms = rooms
         self.player = player
-        self.cycle = DAY
+        self.cycle = PASSIVE
         self.menu = menu
         self.items = items
         self.stress = stress
@@ -30,11 +30,11 @@ class Game():
         self.clock = pygame.time.Clock()
         return
 
-    def switchTime(self):
-        if self.cycle == NIGHT:
-            self.cycle = DAY
+    def switchCycle(self):
+        if self.cycle == PASSIVE:
+            self.cycle = ACTIVE
         else:
-            self.cycle = NIGHT
+            self.cycle = PASSIVE
         return
     
     def switchRoom(self, new_room : str):
@@ -42,11 +42,13 @@ class Game():
         return
 
     def runGame(self, screen):
-        self.rooms[self.actual_room].rotate()
-        self.player.rotate()
+        if (self.cycle == ACTIVE):
+            self.rooms[self.actual_room].rotate()
+            self.player.rotate()
+            for item in self.items:
+                item.rotate()
         self.rooms[self.actual_room].draw(screen)
         for item in self.items:
-            item.rotate()
             item.update()
             item.collect(self.player, self.stress)    
             item.draw(screen)

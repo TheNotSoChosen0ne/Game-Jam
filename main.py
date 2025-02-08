@@ -78,6 +78,10 @@ stress_bar = StressBar(x=1730, y=220)
 # GAME INIT
 game = Game(player, rooms, menu, fruits, stress_bar)
 
+# THEME MENU
+pygame.mixer.music.load("assets/music/menu.mp3")
+pygame.mixer.music.play(0)
+
 # MAIN LOOP
 def main():
 
