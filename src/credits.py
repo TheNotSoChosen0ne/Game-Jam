@@ -3,13 +3,17 @@ import pygame
 def credits(screen, clock, fps=30):
     pygame.mixer.init()
     pygame.mixer.music.load("music/credits.mp3")
-    pygame.mixer.music.play()
-    img = pygame.image.load("img/credits.jpg").convert()
-    img = pygame.transform.scale(img, (screen.get_width(), screen.get_height()))
-    img.set_alpha(200)
+    pygame.mixer.music.play(-1)
+
+    original_img = pygame.image.load("img/credits.jpg").convert()
+    original_img = pygame.transform.scale(original_img, (screen.get_width(), screen.get_height()))
+    img = original_img.copy()
+    angle = 0
+
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     font = pygame.font.Font("pixel_font.otf", 42)
+
     credits = [
         "Script: Loann Badina",
         "Art: Nicolas Bach",
@@ -27,6 +31,7 @@ def credits(screen, clock, fps=30):
     credit_y = screen.get_height()
     credit_speed = 2
     running = True
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -34,14 +39,24 @@ def credits(screen, clock, fps=30):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
+
         screen.fill(BLACK)
-        screen.blit(img, (screen.get_width() // 2 - img.get_width() // 2, screen.get_height() // 2 - img.get_height() // 2))
-        img = pygame.transform.rotate(img, 1)
+
+        # Rotation
+        angle += 1
+        img = pygame.transform.rotate(original_img, angle)
+        rotated_rect = img.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
+        screen.blit(img, rotated_rect.topleft)
+
+        # Affichage des crédits
         for i, surface in enumerate(credit_surfaces):
             screen.blit(surface, (screen.get_width() // 2 - surface.get_width() // 2, credit_y + i * 40))
+
         credit_y -= credit_speed
         if credit_y + len(credit_surfaces) * 40 < 0:
             credit_y = screen.get_height()
+
         pygame.display.flip()
         clock.tick(fps)
+
     pygame.mixer.music.stop()

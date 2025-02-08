@@ -5,6 +5,7 @@ from src.classes.inventory import *
 from src.classes.objects import *
 from src.classes.menu import *
 from src.classes.window import *
+from src.credits import *
 from random import *
 from math import *
 import os.path
@@ -30,7 +31,6 @@ def main():
     menu.addButton(creditButton)
 
     window.startClock()
-
     while window.running:
 
         window.clock.tick(window.fps)
@@ -43,6 +43,8 @@ def main():
             window.checkEvents(event)
             if menu.active:
                 menu.handle_event(event)
+            if False:
+                credits(window.screen, window.clock)
 
         if menu.active:
             window.screen.blit(window.backgrnd, (0, 0))
