@@ -35,7 +35,7 @@ class Menu():
             self.buttons[i].draw(screen)
         return
 
-    def handle_event(self, event):
+    def handle_event(self, event, window):
         if event.type == pygame.MOUSEBUTTONDOWN:
             for button in self.buttons:
                 if button.imageRect.collidepoint(event.pos):
@@ -52,6 +52,10 @@ class Menu():
                 elif self.buttons[self.activeIndex].type == "credits":
                     self.credits = True
                     self.active = False
+                elif self.buttons[self.activeIndex].type == "quit":
+                    self.active = False
+                    self.credits = False
+                    window.running = False
             if event.key == pygame.K_DOWN:
                 self.activeIndex += 1
                 if self.activeIndex == len(self.buttons):

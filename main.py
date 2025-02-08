@@ -40,11 +40,17 @@ imageCreditButton = (
     pygame.image.load("img/Buttons_Pixel_Animation_Pack/about/343px/about01.png"),
     pygame.image.load("img/Buttons_Pixel_Animation_Pack/about/343px/about03.png")
 )
-startButton = ImageButton(imageStartButton[0], imageStartButton[1], 1920 / 2 - 395, 200, "start")
-creditButton = ImageButton(imageCreditButton[0], imageCreditButton[1], 1920 / 2 - 395, 600, "credits")
+imageQuitButton = (
+    pygame.image.load("img/Buttons_Pixel_Animation_Pack/back/343px/back01.png"),
+    pygame.image.load("img/Buttons_Pixel_Animation_Pack/back/343px/back03.png")
+)
+startButton = ImageButton(imageStartButton[0], imageStartButton[1], 1920 / 2 - 395, 100, "start")
+creditButton = ImageButton(imageCreditButton[0], imageCreditButton[1], 1920 / 2 - 395, 400, "credits")
+quitButton = ImageButton(imageQuitButton[0], imageQuitButton[1], 1920 / 2 - 395, 700, "quit")
 menu = Menu()
 menu.addButton(startButton)
 menu.addButton(creditButton)
+menu.addButton(quitButton)
 
 # GAME INIT
 
@@ -65,7 +71,7 @@ def main():
         for event in pygame.event.get():
             window.checkEvents(event)
             if game.menu.active:
-                game.menu.handle_event(event)
+                game.menu.handle_event(event, window)
             elif game.menu.active == False and game.menu.credits == False:
                 game.player.move(pygame.key.get_pressed())
 
