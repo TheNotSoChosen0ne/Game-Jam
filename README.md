@@ -4,7 +4,7 @@
 Pour exécuter le jeu localement, suivez ces étapes :
 1. Clonez le dépôt :
     ```sh
-    git clone https://github.com/yourusername/Game-Jam.git
+    git clone https://github.com/Weftus/Game-Jam.git
     ```
 2. Accédez au répertoire du projet :
     ```sh
