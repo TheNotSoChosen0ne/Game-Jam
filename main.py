@@ -22,8 +22,14 @@ def main():
     BLACK = (0, 0, 0)
     RED = (175, 255, 175)
 
-    imageStartButton = pygame.image.load("./img/Modern_UI_Pack/Buttons/Normal/Play.png")
-    imageCreditButton = pygame.image.load("./img/Modern_UI_Pack/Buttons/Normal/Community.png")
+    imageStartButton = (
+        pygame.image.load("img/Buttons Pixel Animation Pack/play/343px/play01.png"),
+        pygame.image.load("img/Buttons Pixel Animation Pack/play/343px/play03.png")
+    )
+    imageCreditButton = (
+        pygame.image.load("img/Buttons Pixel Animation Pack/about/343px/about01.png"),
+        pygame.image.load("img/Buttons Pixel Animation Pack/about/343px/about03.png")
+    )
     startButton = ImageButton(imageStartButton, 1920 / 2, 1080 / 2, "start")
     creditButton = ImageButton(imageCreditButton, 1920 / 2, 1080 / 2 + 200, "credits")
     menu = Menu()
