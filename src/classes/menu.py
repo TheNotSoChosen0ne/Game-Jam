@@ -1,8 +1,10 @@
 import pygame
 
 class ImageButton():
-    def __init__(self, image, pos_x : float, pos_y : float, type : str):
-        self.image = image
+    def __init__(self, imageActive, imageInactive, pos_x : float, pos_y : float, type : str):
+        self.imageActive = imageActive
+        self.imageInactive = imageInactive
+        self.image = self.imageActive
         self.pos = (pos_x, pos_y)
         self.imageRect = self.image.get_rect(topleft=self.pos)
         self.type = type
