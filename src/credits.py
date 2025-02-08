@@ -6,7 +6,6 @@ def credits(screen, clock, fps=30):
     pygame.mixer.music.play()
     img = pygame.image.load("img/credits.jpg").convert()
     img = pygame.transform.scale(img, (screen.get_width(), screen.get_height()))
-    # set opacity to 80%
     img.set_alpha(200)
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
@@ -37,6 +36,7 @@ def credits(screen, clock, fps=30):
                     running = False
         screen.fill(BLACK)
         screen.blit(img, (screen.get_width() // 2 - img.get_width() // 2, screen.get_height() // 2 - img.get_height() // 2))
+        img = pygame.transform.rotate(img, 1)
         for i, surface in enumerate(credit_surfaces):
             screen.blit(surface, (screen.get_width() // 2 - surface.get_width() // 2, credit_y + i * 40))
         credit_y -= credit_speed
