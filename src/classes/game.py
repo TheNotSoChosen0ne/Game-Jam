@@ -48,10 +48,12 @@ class Game():
         self.fillFruits()
         self.rooms[self.actual_room].rotate()
         self.player.rotate()
-        for fruit in self.fruits:
-            fruit.rotate()
         self.rooms[self.actual_room].draw(screen)
         for fruit in self.fruits:
-            fruit.draw(screen)
+            fruit.rotate()
+            if fruit.collect(self.player):
+                self.fruits.remove(fruit)
+            else:
+                fruit.draw(screen)
         self.player.draw(screen)
         return
