@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+import os
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
+
 from src.classes.characters import *
 from src.classes.inventory import *
 from src.classes.objects import *
