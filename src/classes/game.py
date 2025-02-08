@@ -1,22 +1,25 @@
 import pygame
+import random
 from typing import List
 
 from src.classes.room import *
 from src.classes.player import *
 from src.classes.menu import *
 from src.classes.window import *
+from src.classes.objects import Fruit
 
 DAY = 1
 NIGHT = 0
 
 class Game():
-    def __init__(self, player : Player, rooms : list["Room"], menu : Menu):
+    def __init__(self, player : Player, rooms : list["Room"], menu : Menu, fruits : list["Fruit"]):
         self.actual_room = "office"
         self.rooms = rooms
         self.player = player
         self.cycle = DAY
         self.menu = menu
-        self.font = pygame.font.Font("pixel_font.otf", 42)
+        self.fruits = fruits
+        self.font = pygame.font.Font("assets/font/pixel_font.otf", 42)
         self.time = pygame.time.Clock()
         return
 
@@ -30,18 +33,16 @@ class Game():
     def switchRoom(self, new_room : str):
         self.actual_room = new_room
         return
-    
+
     def runGame(self, screen):
-        self.fillFruits()
         self.rooms[self.actual_room].rotate()
         self.player.rotate()
         self.rooms[self.actual_room].draw(screen)
         for fruit in self.fruits:
             fruit.rotate()
-            if fruit.collect(self.player):
-                self.fruits.remove(fruit)
-            else:
-                fruit.draw(screen)
+            fruit.update()
+            fruit.collect(self.player)    
+            fruit.draw(screen)
         self.player.draw(screen)
         return
 

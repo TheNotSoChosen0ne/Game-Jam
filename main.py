@@ -28,15 +28,19 @@ rooms = {
     "carter_house": Room(pygame.image.load("assets/img/background/room1.jpeg"), [], [], 540, 540)
 }
 
+# WINDOW INIT
 window = Window((1920, 1080), "assets/img/background/room2.jpeg", 30, "You are a Detective and you look for clues because there was a crime and you have to find the culprit")
 window.initWindow()
 window.setBackground()
 window.setFont("assets/font/pixel_font.otf", 42)
 
+
+# COLOR INIT
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (175, 255, 175)
 
+# MENU INIT
 imageStartButton = (
     pygame.image.load("assets/img/Buttons_Pixel_Animation_Pack/play/343px/play01.png"),
     pygame.image.load("assets/img/Buttons_Pixel_Animation_Pack/play/343px/play03.png")
@@ -57,10 +61,15 @@ menu.addButton(startButton)
 menu.addButton(creditButton)
 menu.addButton(quitButton)
 
-# GAME INIT
+# # FRUIT INIT
+# fruits = [
+#     Fruit(5, pygame.image.load())
+# ]
 
+# GAME INIT
 game = Game(player, rooms, menu, [])
 
+# MAIN LOOP
 def main():
 
     pygame.mouse.set_visible(False)

@@ -13,7 +13,7 @@ class Fruit():
         self.offset = self.pos - self.center
         return
 
-    def update(player : Player):
+    def update(self):
         pass
 
     def rotate(self):
@@ -29,9 +29,8 @@ class Fruit():
         screen.blit(rotated_image, sprite_rect.topleft)
         return
 
-    def collect(self, player):
+    def collect(self, player : Player):
         keys = pygame.key.get_pressed()
         if player.position.distance_to(self.pos) < 100:
             if keys[pygame.K_e]:
-                return True
-        return False
+                pass
