@@ -13,7 +13,7 @@ def credits(screen, clock, fps=30):
         "Script: Loann Badina",
         "Art: Nicolas Bach",
         "Game Developer: Lilian Locher",
-        "Game Developer: Thibaut Musslin",
+        "Audio Engineer: Thibaut Musslin",
         "",
         "Yanis With: Bonsoir jeune aventurier, veux-tu faire la quête du forgeron ?",
         "",
