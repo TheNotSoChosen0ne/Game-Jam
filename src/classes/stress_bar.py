@@ -21,7 +21,10 @@ class StressBar:
         self.current_stress = 0
         self.color = (128, 0, 128)
         self.active = False
+        self.sound_time = 0.0
         self.last_update_time = 0.0
+        pygame.font.init()
+        self.font = pygame.font.Font(None, 48)
 
     def start(self):
         """
@@ -36,12 +39,14 @@ class StressBar:
         """
         if self.active:
             current_time = time.time()
-            if current_time - self.last_update_time >= 5:  # timer for the augmentation
-                self.current_stress = min(self.max_stress, self.current_stress + 2)  # Increase %
+            if current_time - self.last_update_time >= 0.7:  # timer for the augmentation
+                self.current_stress = min(self.max_stress, self.current_stress + 1)  # Increase %
                 self.last_update_time = current_time  # Reset timer
+            if current_time - self.sound_time >= 10.0 / ((1 + self.current_stress) * 0.1): # timer for the sound
                 pygame.mixer.init()
                 pygame.mixer.music.load("assets/music/stress_bar_sound.mp3")
                 pygame.mixer.music.play(0)
+                self.sound_time = current_time
 
     def change_stress(self, change):
         """
@@ -64,3 +69,8 @@ class StressBar:
                          (self.x, self.y + self.height - filled_height, self.width, filled_height))
 
         pygame.draw.rect(screen, (255, 255, 0), (self.x, self.y, self.width, self.height), 3)
+        stress_text = f"{self.current_stress:.0f}%"
+        text_surface = self.font.render(stress_text, 1, (255, 255, 255))  # White
+        text_x = self.x + (self.width // 2) - (text_surface.get_width() // 2)
+        text_y = self.y - 35  # Position above the bar
+        screen.blit(text_surface, (text_x, text_y))
