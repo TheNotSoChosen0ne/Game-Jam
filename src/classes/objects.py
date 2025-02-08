@@ -1,18 +1,26 @@
-class Clue():
+import pygame
 
-    def __init__(self, name : str, type : str, findingMessage : str):
-        self.find = False
-        self.type = type
-        self.name = name
-        self.found_message = findingMessage
+class Fruits():
+
+    def __init__(self, points : float, image, pos : tuple, rotation : float, center):
+        self.points = points
+        self.image = image
+        self.rotation = rotation
+        self.speed = 2
+        self.pos = pygame.Vector2(pos[0], pos[1])
+        self.center = center
+        self.offset = self.pos - self.center
         return
 
-    def found(self):
-        print(self.found_message)
-        self.find = True
+    def rotate(self):
+        dangle = self.speed
+        self.rotation = (self.rotation + dangle) % 360
+        self.offset = self.offset.rotate(dangle)
+        self.pos = self.center + self.offset
         return
 
-    def collect(self, inventory):
-        inventory.addObject(self)
-        print(f"{self.name} ajouté à : {inventory.name}")
+    def draw(self, screen):
+        rotated_image = pygame.transform.rotate(self.image, -self.rotation)
+        sprite_rect = rotated_image.get_rect(center=self.pos)
+        screen.blit(rotated_image, sprite_rect.topleft)
         return
