@@ -2,7 +2,7 @@ import pygame
 import time
 
 class StressBar:
-    def __init__(self, x, y, width=30, height=200, max_stress=100):
+    def __init__(self, x, y, width=90, height=600, max_stress=100):
         """
         Initializes the stress bar.
 
@@ -19,7 +19,7 @@ class StressBar:
         self.height = height
         self.max_stress = max_stress
         self.current_stress = 0
-        self.color = (255, 0, 0)
+        self.color = (128, 0, 128)
         self.active = False
         self.last_update_time = 0.0
 
@@ -63,4 +63,4 @@ class StressBar:
         pygame.draw.rect(screen, self.color,
                          (self.x, self.y + self.height - filled_height, self.width, filled_height))
 
-        pygame.draw.rect(screen, (255, 255, 255), (self.x, self.y, self.width, self.height), 3)
+        pygame.draw.rect(screen, (255, 255, 0), (self.x, self.y, self.width, self.height), 3)
