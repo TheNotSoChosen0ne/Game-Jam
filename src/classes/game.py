@@ -16,7 +16,7 @@ class Game():
         self.player = player
         self.cycle = DAY
         self.menu = menu
-        self.font = pygame.font.Font("pixel_font.otf", 42)
+        self.font = pygame.font.Font("assets/font/pixel_font.otf", 42)
         self.time = pygame.time.Clock()
         return
 
@@ -26,14 +26,13 @@ class Game():
         else:
             self.cycle = NIGHT
         return
-    
+
     def switchRoom(self, new_room : str):
         self.actual_room = new_room
         return
-    
+
     def runGame(self, screen):
         self.rooms[self.actual_room].draw(screen)
         self.player.update()
         self.player.draw(screen)
         return
-
