@@ -19,7 +19,7 @@ class StressBar:
         self.width = width
         self.height = height
         self.max_stress = max_stress
-        self.current_stress = 50
+        self.current_stress = 30
         self.color = (128, 0, 128)
         self.active = False
         self.sound_time = 0.0

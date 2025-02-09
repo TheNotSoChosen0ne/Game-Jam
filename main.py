@@ -1,24 +1,21 @@
 #!/usr/bin/env python3
 
 import os
-os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
-from src.classes.stress_bar import *
-from src.classes.characters import *
-from src.classes.inventory import *
-from src.classes.objects import *
-from src.classes.menu import *
-from src.classes.window import *
-from src.classes.room import *
+from src.classes.player import Player
+from src.classes.room import Room
+from src.classes.window import Window
+from src.classes.menu import Menu, ImageButton
+from src.classes.music import Music
+from src.classes.objects import Item
+from src.classes.stress_bar import StressBar
 from src.classes.game import Game
-from src.classes.music import *
-from src.credits import *
-from random import *
+from src.credits import credits
 
-from math import *
 import os.path
 import pygame
-import time
+
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 # PLAYER INIT
 player = Player("Stellan Voss", [pygame.image.load("assets/img/sprite_detective/detective_front.png"),
@@ -27,7 +24,7 @@ player = Player("Stellan Voss", [pygame.image.load("assets/img/sprite_detective/
 
 # ROOMS INIT
 rooms = {
-    "office": Room(pygame.image.load("assets/img/rooms/office_filled.png"), [], [], 540, 540),
+    "hospital": Room(pygame.image.load("assets/img/rooms/hospital.png"), [], [], 540, 540),
     "carter_house": Room(pygame.image.load("assets/img/background/room1.jpeg"), [], [], 540, 540)
 }
 
@@ -119,22 +116,15 @@ def main():
         # Print the menu
         elif game.menu.active:
             if not pygame.mixer.music.get_busy():
-                music_menu.play_music()
+                music_menu.unpause_music()
             window.screen.blit(window.backgrnd, (0, 0))
             game.menu.draw(window.screen)
 
-        # The game
-        elif not game.menu.active and first_start == 0:
-            music_menu.stop_music()
-            window.screen.fill(BLACK)
-            stress_bar.start()
-            game.runGame(window.screen)
-            game.startClock()
-            first_start = 1
-            music_menu.start_music()
-
         elif not game.menu.active:
-            music_menu.stop_music()
+            if first_start == 0:
+                music_menu.stop_music()
+                stress_bar.start()
+                first_start = 1
             window.screen.fill(BLACK)
             game.runGame(window.screen)
             stress_bar.update()
