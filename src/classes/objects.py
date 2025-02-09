@@ -9,7 +9,7 @@ class Item():
 
     def __init__(self, points : float, image, center, respawn_time : int, reducer : int, freezing : bool):
         self.points = points
-        self.image = pygame.transform.scale(image, (80, 80))
+        self.image = pygame.transform.scale(image, (60, 60))
         self.rotation = 0
         self.rotation_direction = 1
         self.rotation_speed = 2
@@ -57,7 +57,7 @@ class Item():
 
     def collect(self, player : Player, stress_bar : StressBar):
         keys = pygame.key.get_pressed()
-        if player.position.distance_to(self.pos) < 60 and self.state == "spawned":
+        if player.position.distance_to(self.pos) < 50 and self.state == "spawned":
             if keys[pygame.K_e]:
                 self.state = "collected"
                 stress_bar.change_stress(-self.reducer)
