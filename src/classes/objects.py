@@ -4,6 +4,7 @@ from src.classes.stress_bar import StressBar
 from src.classes.player import Player
 
 import time
+from token import STAR
 
 class Item():
 
@@ -21,15 +22,22 @@ class Item():
         self.respawn_time = respawn_time
         self.reducer = reducer
         self.freezing = freezing
+        self.spawn_enabled = False # For the spawn of the pill when the stress_bar attain 50% for the first time
         self.freeze_log = True
         return
 
-    def update(self, stress : StressBar):
+    def update(self, stress: StressBar):
         elapsed = float(time.time() - self.start_time)
+
+        if stress.current_stress >= stress.max_stress / 2 and not self.spawn_enabled:
+            self.spawn_enabled = True
+            self.state = "collected"
+            timer = time.time()
+            self.start_time = timer
         if self.state == "collected" and self.freezing and elapsed > 10 and self.freeze_log:
             stress.freeze(False)
             self.freeze_log = False
-        if self.state == "collected" and elapsed > self.respawn_time:
+        if self.state == "collected" and self.spawn_enabled and elapsed > self.respawn_time:
             self.state = "spawned"
 
     def startClock(self):
