@@ -5,6 +5,7 @@ from src.classes.player import Player
 from src.classes.menu import Menu
 from src.classes.objects import Item
 from src.classes.stress_bar import StressBar
+from src.classes.music import Music
 from src.classes.sprites import StaticSprite
 
 ACTIVE = 1
@@ -14,6 +15,7 @@ class Game():
     def __init__(self, player : Player, rooms, menu : Menu, items : list["Item"], stress : StressBar):
         self.start_time = time.time()
         self.clock = pygame.time.Clock()
+        self.music = Music("assets/music/game_music.mp3")
         self.actual_room = "hospital"
         self.rooms = rooms
         self.player = player
@@ -23,6 +25,7 @@ class Game():
         self.stress = stress
         self.font = pygame.font.Font("assets/font/pixel_font.otf", 42)
         self.help = StaticSprite(pygame.transform.scale(pygame.image.load("assets/img/collect/legend.png"), (600, 600)), 1200, 200)
+        self.has_reached_50 = False
         return
 
     def startClock(self):
@@ -41,6 +44,8 @@ class Game():
         return
 
     def runGame(self, screen):
+        if not pygame.mixer.music.get_busy():
+            self.music.unpause_music()
         if self.stress.current_stress < 60:
             self.rooms[self.actual_room].rotation_speed = 1
             self.rooms[self.actual_room].rotation_direction = 1
@@ -55,6 +60,8 @@ class Game():
                 item.rotation_direction = 1
                 if item.angle != 0:
                     item.rotate_back()
+        if self.stress.current_stress >= 50:
+            self.has_reached_50 = True
         if 70 <= self.stress.current_stress < 80:
             self.rooms[self.actual_room].rotation_speed = 1
             self.rooms[self.actual_room].rotation_direction = 1
@@ -93,6 +100,7 @@ class Game():
             item.update(self.stress)
             item.collect(self.player, self.stress)
             item.draw(screen)
+        if self.has_reached_50:
+            self.help.draw(screen)
         self.player.draw(screen)
-        self.help.draw(screen)
         return

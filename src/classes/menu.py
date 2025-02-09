@@ -1,4 +1,5 @@
 import pygame
+from src.classes.music import Music
 
 class ImageButton():
     def __init__(self, imageInactive, imageActive, pos_x : float, pos_y : float, type : str):
@@ -17,6 +18,7 @@ class ImageButton():
 class Menu():
     def __init__(self):
         self.activeIndex = 0
+        self.music = Music("assets/music/menu.mp3")
         self.buttons = []
         self.active = True
         self.credits = False
@@ -35,11 +37,13 @@ class Menu():
             self.buttons[i].draw(screen)
         return
 
-    def handle_event(self, event, window):
+    def handle_event(self, event, window, game):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 if self.buttons[self.activeIndex].type == "start":
                     self.active = False
+                    self.music.stop_music()
+                    game.music.start_music()
                 elif self.buttons[self.activeIndex].type == "credits":
                     self.credits = True
                     self.active = False
