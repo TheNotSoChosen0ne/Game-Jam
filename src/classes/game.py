@@ -1,6 +1,7 @@
 import pygame
 import time
 
+from src.color import *
 from src.classes.player import Player
 from src.classes.menu import Menu
 from src.classes.objects import Item
@@ -21,6 +22,7 @@ class Game():
         self.player = player
         self.cycle = PASSIVE
         self.menu = menu
+        self.color = (0, 0, 0)
         self.items = items
         self.stress = stress
         self.font = pygame.font.Font("assets/font/pixel_font.otf", 42)
@@ -44,6 +46,7 @@ class Game():
         return
 
     def runGame(self, screen):
+        screen.fill(self.color)
         if not pygame.mixer.music.get_busy():
             self.music.unpause_music()
         if self.stress.current_stress < 60:
@@ -85,6 +88,7 @@ class Game():
                 item.rotation_direction = -1
                 item.rotate()
         if 90 <= self.stress.current_stress:
+            self.color = next_rainbow_color(self.color)
             self.rooms[self.actual_room].rotation_speed = 2.0
             self.rooms[self.actual_room].rotation_direction = -1
             self.player.rotation_speed = 2.25
