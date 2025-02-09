@@ -19,6 +19,7 @@ class Game():
         self.elapsed = 0.0
         self.music = Music("assets/music/game_music.mp3")
         self.actual_room = "hospital"
+        self.insane = False
         self.rooms = rooms
         self.player = player
         self.cycle = ACTIVE
