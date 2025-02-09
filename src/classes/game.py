@@ -51,6 +51,7 @@ class Game():
         self.elapsed += (time.time() - self.start_time)
         self.start_time = time.time()
         if (self.elapsed >= 15): # 203
+            self.music.stop_music()
             return True
         return False
 
