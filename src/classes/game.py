@@ -9,7 +9,7 @@ from src.classes.music import Music
 from src.classes.sprites import StaticSprite
 
 ACTIVE = 1
-PASSIVE = 0
+ENDED = 0
 
 class Game():
     def __init__(self, player : Player, rooms, menu : Menu, items : list["Item"], stress : StressBar):
@@ -19,7 +19,7 @@ class Game():
         self.actual_room = "hospital"
         self.rooms = rooms
         self.player = player
-        self.cycle = PASSIVE
+        self.cycle = ENDED
         self.menu = menu
         self.items = items
         self.stress = stress
@@ -33,33 +33,24 @@ class Game():
         return
 
     def switchCycle(self):
-        if (self.cycle == PASSIVE):
+        if (self.cycle == ENDED):
             self.cycle = ACTIVE
         else:
-            self.cycle = PASSIVE
+            self.cycle = ENDED
         return
 
     def switchRoom(self, new_room : str):
         self.actual_room = new_room
         return
+    
+    def win(self):
+        if (time.time() - self.start_time >= 203):
+            return True
+        return False
 
     def runGame(self, screen):
         if not pygame.mixer.music.get_busy():
             self.music.unpause_music()
-        if self.stress.current_stress < 60:
-            self.rooms[self.actual_room].rotation_speed = 1
-            self.rooms[self.actual_room].rotation_direction = 1
-            self.player.rotation_speed = 1
-            self.player.rotation_direction = 1
-            if self.rooms[self.actual_room].angle != 0:
-                self.rooms[self.actual_room].rotate_back()
-            if self.player.angle != 0:
-                self.player.rotate_back()
-            for item in self.items:
-                item.rotation_speed = 1
-                item.rotation_direction = 1
-                if item.angle != 0:
-                    item.rotate_back()
         if self.stress.current_stress >= 50:
             self.has_reached_50 = True
         if 70 <= self.stress.current_stress < 80:

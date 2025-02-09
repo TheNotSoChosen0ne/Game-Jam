@@ -11,7 +11,7 @@ from src.classes.menu import Menu, ImageButton
 from src.classes.music import Music
 from src.classes.objects import Item
 from src.classes.stress_bar import StressBar
-from src.classes.game import Game
+from src.classes.game import Game, ACTIVE, ENDED
 from src.credits import credits
 
 # PLAYER INIT
@@ -22,7 +22,8 @@ player = Player("Stellan Voss", [pygame.image.load("assets/img/sprite_detective/
 # ROOMS INIT
 rooms = {
     "hospital": Room(pygame.image.load("assets/img/rooms/hospital.png"), [], [], 540, 540),
-    "carter_house": Room(pygame.image.load("assets/img/background/room1.jpeg"), [], [], 540, 540)
+    "carter_house": Room(pygame.image.load("assets/img/background/room1.jpeg"), [], [], 540, 540),
+    "ending": Room(pygame.image.load("assets/img/rooms/Ending.png"), [], [], 540, 540)
 }
 
 # WINDOW INIT
@@ -113,8 +114,9 @@ def main():
                 menu.music.unpause_music()
             window.screen.blit(window.backgrnd, (0, 0))
             game.menu.draw(window.screen)
+            game.start_time += (pygame.time.get_ticks() / 1000)
 
-        elif not game.menu.active:
+        elif game.cycle == ACTIVE:
             if first_start == 0:
                 menu.music.stop_music()
                 game.music.start_music()
@@ -125,6 +127,9 @@ def main():
             game.runGame(window.screen)
             stress_bar.update()
             stress_bar.draw(window.screen)
+
+        elif game.cycle == ENDED:
+            ending(window, game)
 
         window.screen.blit(frames, (0, 0))
 
