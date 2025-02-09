@@ -105,7 +105,6 @@ def main():
         if game.menu.credits:
             menu.music.stop_music()
             credits(window.screen, game.clock)
-            game.start_time += (time.time() - game.start_time)
             menu.credits = False
             menu.active = True
             menu.activeIndex = 0
