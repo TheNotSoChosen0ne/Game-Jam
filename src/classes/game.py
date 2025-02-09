@@ -31,7 +31,7 @@ class Game():
         return
 
     def switchCycle(self):
-        if self.cycle == PASSIVE:
+        if (self.cycle == PASSIVE):
             self.cycle = ACTIVE
         else:
             self.cycle = PASSIVE
@@ -42,16 +42,15 @@ class Game():
         return
 
     def runGame(self, screen):
-        if (self.cycle == ACTIVE):
+        if (self.stress.current_stress >= 70):
             self.rooms[self.actual_room].rotate()
             self.player.rotate()
             for item in self.items:
                 item.rotate()
         self.rooms[self.actual_room].draw(screen)
         for item in self.items:
-            item.update()
+            item.update(self.stress)
             item.collect(self.player, self.stress)    
             item.draw(screen)
         self.player.draw(screen)
         return
-

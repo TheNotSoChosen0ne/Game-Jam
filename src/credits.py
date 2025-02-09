@@ -1,9 +1,8 @@
 import pygame
+from src.classes.music import *
 
-def credits(screen, clock, fps=30):
-    pygame.mixer.init()
-    pygame.mixer.music.load("assets/music/credits.mp3")
-    pygame.mixer.music.play(-1)
+def credits(screen, clock, fps = 30):
+    bkgrnd_music = Music("assets/music/credits.mp3")
 
     original_img = pygame.image.load("assets/img/background/credits.jpg").convert()
     original_img = pygame.transform.scale(original_img, (screen.get_width(), screen.get_height()))
@@ -44,6 +43,7 @@ def credits(screen, clock, fps=30):
     credit_speed = 2
     running = True
 
+    bkgrnd_music.start_music()
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -71,4 +71,4 @@ def credits(screen, clock, fps=30):
         pygame.display.flip()
         clock.tick(fps)
 
-    pygame.mixer.music.stop()
+    bkgrnd_music.stop_music()

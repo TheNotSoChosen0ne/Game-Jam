@@ -21,7 +21,9 @@ import pygame
 import time
 
 # PLAYER INIT
-player = Player("Stellan Voss", pygame.image.load("assets/img/sprite_detective/detective_front.png"), 80, 110, 3, 450, 450, 1, (540, 540))
+player = Player("Stellan Voss", [pygame.image.load("assets/img/sprite_detective/detective_front.png"),
+                                 pygame.image.load("assets/img/sprite_detective/detective_back.png")],
+                                80, 110, 2, 450, 450, 1, (540, 540))
 
 # ROOMS INIT
 rooms = {
@@ -63,8 +65,6 @@ menu.addButton(creditButton)
 menu.addButton(quitButton)
 
 music_menu = Music("assets/music/MELANCHOLIA.wav")
-music_menu.load_music()
-music_menu.play_music()
 
 # FRUIT INIT
 fruits = [
@@ -83,14 +83,15 @@ stress_bar = StressBar(x=1730, y=220)
 # GAME INIT
 game = Game(player, rooms, menu, fruits, stress_bar)
 
-# THEME MENU
-pygame.mixer.music.load("assets/music/menu.mp3")
-pygame.mixer.music.play(0)
 
 # MAIN LOOP
 def main():
 
     first_start = 0
+    # THEME MENU
+    music_menu.start_music()
+    #pygame.mixer.music.load("assets/music/menu.mp3")
+    #pygame.mixer.music.play(-1)
     while window.running:
 
         game.clock.tick(window.fps)
@@ -113,9 +114,9 @@ def main():
             menu.credits = False
             menu.active = True
             menu.activeIndex = 0
-            pygame.mixer.music.stop()
-            music_menu.load_music()
-            music_menu.play_music()
+            #pygame.mixer.music.stop()
+            pygame.mixer_music.stop()
+            music_menu.start_music()
 
         # Print the menu
         elif game.menu.active:
@@ -128,12 +129,11 @@ def main():
         elif not game.menu.active and first_start == 0:
             music_menu.stop_music()
             window.screen.fill(BLACK)
-            game.runGame(window.screen)
             stress_bar.start()
+            game.runGame(window.screen)
             game.startClock()
             first_start = 1
-            music_menu.load_music()
-            music_menu.play_music()
+            music_menu.start_music()
 
         elif not game.menu.active:
             music_menu.stop_music()
@@ -141,8 +141,7 @@ def main():
             game.runGame(window.screen)
             stress_bar.update()
             stress_bar.draw(window.screen)
-            music_menu.load_music()
-            music_menu.play_music()
+            music_menu.start_music()
 
         window.screen.blit(frames, (0, 0))
 

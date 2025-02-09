@@ -2,12 +2,13 @@ import pygame
 import math
 
 class Player:
+
     def __init__(self, name: str, spritesheet, frame_width: int, frame_height: int, num_frames: int, 
                  pos_x: int, pos_y: int, delay: int, rotation_center):
         self.name = name
         # Découper les frames du spritesheet
         self.frames = [
-            spritesheet.subsurface(pygame.Rect(i * frame_width, 0, frame_width, frame_height))
+            spritesheet[i].subsurface(pygame.Rect(0, 0, frame_width, frame_height))
             for i in range(num_frames)
         ]
         
@@ -62,6 +63,7 @@ class Player:
             else:
                 movement += pygame.Vector2(math.sin(rad), -math.cos(rad)) * self.speed
                 self.limits[1] -= self.speed
+                self.image = self.frames[1]
                 #changement de sprite à faire
         if keys[pygame.K_DOWN]:
             if self.limits[1] >= 890:
@@ -69,6 +71,7 @@ class Player:
             else:
                 movement += pygame.Vector2(-math.sin(rad), math.cos(rad)) * self.speed
                 self.limits[1] += self.speed
+                self.image = self.frames[0]
                 #changement de sprite à faire
         if keys[pygame.K_LEFT]:
             if self.limits[0] <= 150:

@@ -2,6 +2,7 @@ import pygame
 import time
 
 class StressBar:
+
     def __init__(self, x, y, width=90, height=600, max_stress=100):
         """
         Initializes the stress bar.
@@ -18,7 +19,7 @@ class StressBar:
         self.width = width
         self.height = height
         self.max_stress = max_stress
-        self.current_stress = 0
+        self.current_stress = 50
         self.color = (128, 0, 128)
         self.active = False
         self.sound_time = 0.0
