@@ -30,12 +30,14 @@ class Window():
         self.font = pygame.font.Font(self.fontPath, self.fontSize)
         return
 
-    def checkEvents(self, event, menu):
+    def checkEvents(self, event, menu, game):
         if event.type == pygame.QUIT:
             self.running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
+                game.music.stop_music()
                 menu.active = True
+                menu.music.start_music()
         return
 
     def refresh(self):

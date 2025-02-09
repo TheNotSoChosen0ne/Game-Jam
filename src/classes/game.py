@@ -5,6 +5,7 @@ from src.classes.player import Player
 from src.classes.menu import Menu
 from src.classes.objects import Item
 from src.classes.stress_bar import StressBar
+from src.classes.music import Music
 
 ACTIVE = 1
 PASSIVE = 0
@@ -13,6 +14,7 @@ class Game():
     def __init__(self, player : Player, rooms, menu : Menu, items : list["Item"], stress : StressBar):
         self.start_time = time.time()
         self.clock = pygame.time.Clock()
+        self.music = Music("assets/music/game_music.mp3")
         self.actual_room = "hospital"
         self.rooms = rooms
         self.player = player
@@ -39,6 +41,8 @@ class Game():
         return
 
     def runGame(self, screen):
+        if not pygame.mixer.music.get_busy():
+            self.music.unpause_music()
         if 65 <= self.stress.current_stress < 75:
             self.rooms[self.actual_room].rotation_speed = 1
             self.rooms[self.actual_room].rotation_direction = 1

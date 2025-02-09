@@ -61,7 +61,6 @@ menu.addButton(startButton)
 menu.addButton(creditButton)
 menu.addButton(quitButton)
 
-music_menu = Music("assets/music/MELANCHOLIA.wav")
 
 # FRUIT INIT
 fruits = [
@@ -85,10 +84,7 @@ game = Game(player, rooms, menu, fruits, stress_bar)
 def main():
 
     first_start = 0
-    # THEME MENU
-    music_menu.start_music()
-    #pygame.mixer.music.load("assets/music/menu.mp3")
-    #pygame.mixer.music.play(-1)
+    menu.music.start_music()
     while window.running:
 
         game.clock.tick(window.fps)
@@ -97,39 +93,40 @@ def main():
 
         # Check events
         for event in pygame.event.get():
-            window.checkEvents(event, menu)
+            window.checkEvents(event, menu, game)
             if game.menu.active:
-                game.menu.handle_event(event, window)
+                game.menu.handle_event(event, window, game)
             elif game.menu.active == False and game.menu.credits == False:
                 game.player.move(pygame.key.get_pressed())
 
 
         # Print credits
         if game.menu.credits:
-            music_menu.stop_music()
+            menu.music.stop_music()
             credits(window.screen, game.clock)
             menu.credits = False
             menu.active = True
             menu.activeIndex = 0
-            music_menu.start_music()
+            menu.music.start_music()
 
         # Print the menu
         elif game.menu.active:
             if not pygame.mixer.music.get_busy():
-                music_menu.unpause_music()
+                menu.music.unpause_music()
             window.screen.blit(window.backgrnd, (0, 0))
             game.menu.draw(window.screen)
 
         elif not game.menu.active:
             if first_start == 0:
-                music_menu.stop_music()
+                menu.music.stop_music()
+                game.music.start_music()
+                pygame.mixer_music.set_volume(0.5)
                 stress_bar.start()
                 first_start = 1
             window.screen.fill(BLACK)
             game.runGame(window.screen)
             stress_bar.update()
             stress_bar.draw(window.screen)
-            music_menu.start_music()
 
         window.screen.blit(frames, (0, 0))
 

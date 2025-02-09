@@ -45,9 +45,6 @@ class StressBar:
                 self.current_stress = min(self.max_stress, self.current_stress + 1)  # Increase %
                 self.last_update_time = current_time  # Reset timer
             if current_time - self.sound_time >= 10.0 / ((1 + self.current_stress) * 0.1): # timer for the sound
-                pygame.mixer.init()
-                pygame.mixer.music.load("assets/sfx/stress_bar_sound.mp3")
-                pygame.mixer.music.play(0)
                 self.sound_time = current_time
 
     def freeze(self, freeze : bool):
