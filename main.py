@@ -123,7 +123,6 @@ def main():
                 pygame.mixer_music.set_volume(0.5)
                 stress_bar.start()
                 first_start = 1
-            window.screen.fill(BLACK)
             game.runGame(window.screen)
             stress_bar.update()
             stress_bar.draw(window.screen)
