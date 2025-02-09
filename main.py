@@ -4,7 +4,15 @@ import os
 import os.path
 import pygame
 
-from src.include import Player, Room, Window, ImageButton, Menu, Music, Item, StressBar, Game, credits
+from src.classes.player import Player
+from src.classes.room import Room
+from src.classes.window import Window
+from src.classes.menu import Menu, ImageButton
+from src.classes.music import Music
+from src.classes.objects import Item
+from src.classes.stress_bar import StressBar
+from src.classes.game import Game
+from src.credits import credits
 
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 

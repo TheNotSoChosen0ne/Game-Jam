@@ -1,6 +1,7 @@
 import pygame
 
-from src.include import StaticSprite, Game
+from src.classes.sprites import StaticSprite
+from src.classes.game import Game
 
 class Door(StaticSprite):
 

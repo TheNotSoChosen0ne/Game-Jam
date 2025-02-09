@@ -1,5 +1,6 @@
 import pygame
-from src.include import Music
+
+from src.classes.music import Music
 
 def credits(screen, clock, fps = 30):
     bkgrnd_music = Music("assets/music/credits.mp3")
