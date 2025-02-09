@@ -1,10 +1,7 @@
 import pygame
 import time
 
-from src.classes.player import Player
-from src.classes.menu import Menu
-from src.classes.objects import Item
-from src.classes.stress_bar import StressBar
+from src.include import Player, Menu, Item, StressBar
 
 ACTIVE = 1
 PASSIVE = 0
