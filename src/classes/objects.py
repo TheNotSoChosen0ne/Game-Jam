@@ -10,7 +10,7 @@ class Item():
     def __init__(self, points : float, image, center, respawn_time : int, reducer : int, freezing : bool):
         self.points = points
         self.image = pygame.transform.scale(image, (60, 60))
-        self.rotation = 0
+        self.angle = 0
         self.rotation_direction = 1
         self.rotation_speed = 2
         self.pos = pygame.Vector2(random.randint(150, 940), random.randint(200, 890))
@@ -35,9 +35,23 @@ class Item():
     def startClock(self):
         self.start_time = time.time()
 
+    def rotate_back(self):
+        if self.angle == 0:
+            return  # Déjà droit
+
+        dangle = min(10, abs(self.angle))  # Tourne de 10 max, mais ne dépasse pas 0
+        self.angle -= dangle if self.angle > 0 else -dangle
+
+        # S'assure que l'angle soit exactement 0 à la fin
+        if abs(self.angle) < 10:
+            self.angle = 0  
+
+        # Mise à jour de la position après rotation
+        self.offset = self.offset.rotate(-dangle if self.angle > 0 else dangle)
+        self.pos = self.center + self.offset
     def rotate(self):
         dangle = self.rotation_speed * self.rotation_direction
-        self.rotation = (self.rotation + dangle) % 360
+        self.angle = (self.angle + dangle) % 360
         self.offset = self.offset.rotate(dangle)
         self.pos = self.center + self.offset
         return
@@ -45,7 +59,7 @@ class Item():
     def draw(self, screen):
         if self.state != "spawned":
             return
-        rotated_image = pygame.transform.rotate(self.image, -self.rotation)
+        rotated_image = pygame.transform.rotate(self.image, -self.angle)
         sprite_rect = rotated_image.get_rect(center=self.pos)
         screen.blit(rotated_image, sprite_rect.topleft)
         return

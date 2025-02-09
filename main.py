@@ -63,11 +63,12 @@ menu.addButton(quitButton)
 
 music_menu = Music("assets/music/MELANCHOLIA.wav")
 
-# FRUIT INIT
-fruits = [
+# PILLS INIT
+pills = [
     Item(5, pygame.image.load("assets/img/collect/green_pill.png"), (540, 540), 5, 5, False),
     Item(5, pygame.image.load("assets/img/collect/red_pill.png"), (540, 540), 15, 10, False),
-    Item(5, pygame.image.load("assets/img/collect/blue_pill.png"), (540, 540), 30, 0, True)
+    Item(5, pygame.image.load("assets/img/collect/blue_pill.png"), (540, 540), 30, 0, True),
+    Item(5, pygame.image.load("assets/img/collect/yellow_pill.png"), (540, 540), 15, -20, False)
 ]
 
 # MOUSE
@@ -78,7 +79,7 @@ pygame.mouse.set_visible(False)
 stress_bar = StressBar(x=1730, y=220)
 
 # GAME INIT
-game = Game(player, rooms, menu, fruits, stress_bar)
+game = Game(player, rooms, menu, pills, stress_bar)
 
 
 # MAIN LOOP

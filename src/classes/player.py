@@ -91,6 +91,26 @@ class Player:
         self.position += movement
         # Met à jour l'offset par rapport au centre de rotation
         self.offset = self.position - self.rotation_center
+        self.limits = [self.position.x, self.position.y]
+
+
+    def rotate_back(self):
+        if self.angle == 0:
+            return  # Déjà droit
+
+        dangle = min(10, abs(self.angle))  # Tourne de 10 max, mais ne dépasse pas 0
+        self.angle -= dangle if self.angle > 0 else -dangle
+
+        # S'assure que l'angle soit exactement 0 à la fin
+        if abs(self.angle) < 10:
+            self.angle = 0  
+
+        # Mise à jour de la position après rotation
+        self.offset = self.offset.rotate(-dangle if self.angle > 0 else dangle)
+        self.position = self.rotation_center + self.offset
+        self.limits = [self.position.x, self.position.y]
+
+
 
     def rotate(self):
         """
@@ -107,3 +127,5 @@ class Player:
         self.offset = self.offset.rotate(delta_angle)
         # Recalcule de la position à partir du centre et du nouvel offset
         self.position = self.rotation_center + self.offset
+        self.limits = [self.position.x, self.position.y]
+

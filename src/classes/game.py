@@ -39,7 +39,21 @@ class Game():
         return
 
     def runGame(self, screen):
-        if 65 <= self.stress.current_stress < 75:
+        if self.stress.current_stress < 60:
+            self.rooms[self.actual_room].rotation_speed = 1
+            self.rooms[self.actual_room].rotation_direction = 1
+            self.player.rotation_speed = 1
+            self.player.rotation_direction = 1
+            if self.rooms[self.actual_room].angle != 0:
+                self.rooms[self.actual_room].rotate_back()
+            if self.player.angle != 0:
+                self.player.rotate_back()
+            for item in self.items:
+                item.rotation_speed = 1
+                item.rotation_direction = 1
+                if item.angle != 0:
+                    item.rotate_back()
+        if 70 <= self.stress.current_stress < 80:
             self.rooms[self.actual_room].rotation_speed = 1
             self.rooms[self.actual_room].rotation_direction = 1
             self.player.rotation_speed = 1
@@ -50,7 +64,7 @@ class Game():
                 item.rotation_speed = 1
                 item.rotation_direction = 1
                 item.rotate()
-        if 75 <= self.stress.current_stress < 90:
+        if 80 <= self.stress.current_stress < 90:
             self.rooms[self.actual_room].rotation_speed = 2
             self.rooms[self.actual_room].rotation_direction = 1
             self.player.rotation_speed = 1.5
