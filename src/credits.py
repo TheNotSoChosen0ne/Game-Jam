@@ -53,6 +53,7 @@ def credits(screen, clock, fps = 30):
         "piskelapp.com",
         "ytb2mp3.org",
         "resizepixel.com",
+        "imgflip.com",
         "-",
         "Les amandes émondées",
         "Les Toblerones",
