@@ -61,7 +61,6 @@ class Game():
             self.music.unpause_music()
         if self.win():
             self.switchCycle()
-            return
         if self.stress.current_stress >= 50:
             self.has_reached_50 = True
         if not self.has_reached_50:

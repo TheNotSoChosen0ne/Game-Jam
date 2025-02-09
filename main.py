@@ -24,7 +24,6 @@ player = Player("Stellan Voss", [pygame.image.load("assets/img/sprite_detective/
 # ROOMS INIT
 rooms = {
     "hospital": Room(pygame.image.load("assets/img/rooms/hospital.png"), [], [], 540, 540),
-    "carter_house": Room(pygame.image.load("assets/img/background/room1.jpeg"), [], [], 540, 540),
     "ending": Room(pygame.image.load("assets/img/rooms/Ending.png"), [], [], 540, 540)
 }
 
