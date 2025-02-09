@@ -1,7 +1,6 @@
 import pygame
 import time
 
-from src.include import Player, Menu, Item, StressBar
 from src.classes.player import Player
 from src.classes.menu import Menu
 from src.classes.objects import Item
