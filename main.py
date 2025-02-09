@@ -88,6 +88,7 @@ def main():
         game.clock.tick(window.fps)
 
         frames = window.font.render("fps: " + str(int(game.clock.get_fps())), 1, WHITE)
+        time_left = window.font.render("time left: " + str(int(203 - game.elapsed)), 1, WHITE)
 
         # Check events
         for event in pygame.event.get():
@@ -100,24 +101,24 @@ def main():
 
         # Print credits
         if game.menu.credits:
-            menu.music.stop_music()
+            game.menu.music.stop_music()
             credits(window.screen, game.clock)
-            menu.credits = False
-            menu.active = True
-            menu.activeIndex = 0
-            menu.music.start_music()
+            game.menu.credits = False
+            game.menu.active = True
+            game.menu.activeIndex = 0
+            game.menu.music.start_music()
 
         # Print the menu
         elif game.menu.active:
             if not pygame.mixer.music.get_busy():
-                menu.music.unpause_music()
+                game.menu.music.unpause_music()
             window.screen.blit(window.backgrnd, (0, 0))
             game.menu.draw(window.screen)
             game.start_time = time.time()
 
         elif game.cycle == ACTIVE:
             if first_start == 0:
-                menu.music.stop_music()
+                game.menu.music.stop_music()
                 game.music.start_music()
                 pygame.mixer_music.set_volume(0.5)
                 stress_bar.start()
@@ -127,6 +128,7 @@ def main():
             if stress_bar.current_stress == 100:
                 game.insane = True
             stress_bar.draw(window.screen)
+            window.screen.blit(time_left, (0, 25))
 
         elif game.cycle == ENDED:
             ending(window, game)

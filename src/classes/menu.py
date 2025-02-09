@@ -43,7 +43,7 @@ class Menu():
                 if self.buttons[self.activeIndex].type == "start":
                     self.active = False
                     self.music.stop_music()
-                    game.music.start_music()
+                    game.music.start_music(game.elapsed)
                 elif self.buttons[self.activeIndex].type == "credits":
                     self.credits = True
                     self.active = False
