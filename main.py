@@ -26,7 +26,7 @@ rooms = {
 }
 
 # WINDOW INIT
-window = Window((1920, 1080), "assets/img/background/room2.jpeg", 30, "You are a Detective and you look for clues because there was a crime and you have to find the culprit")
+window = Window((1920, 1080), "assets/img/background/room2.jpeg", 30, "Cops Dementia")
 window.initWindow()
 window.setBackground()
 window.setFont("assets/font/pixel_font.otf", 42)

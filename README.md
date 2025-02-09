@@ -1,4 +1,4 @@
-# Projet Game-Jam -- [Nom du jeu]
+# Projet Game-Jam -- [Cops Dementia]
 
 ## Installation
 Pour exécuter le jeu localement, suivez ces étapes :
