@@ -25,6 +25,7 @@ class Game():
         self.stress = stress
         self.font = pygame.font.Font("assets/font/pixel_font.otf", 42)
         self.help = StaticSprite(pygame.transform.scale(pygame.image.load("assets/img/collect/legend.png"), (600, 600)), 1200, 200)
+        self.has_reached_50 = False
         return
 
     def startClock(self):
@@ -59,6 +60,8 @@ class Game():
                 item.rotation_direction = 1
                 if item.angle != 0:
                     item.rotate_back()
+        if self.stress.current_stress >= 50:
+            self.has_reached_50 = True
         if 70 <= self.stress.current_stress < 80:
             self.rooms[self.actual_room].rotation_speed = 1
             self.rooms[self.actual_room].rotation_direction = 1
@@ -97,6 +100,7 @@ class Game():
             item.update(self.stress)
             item.collect(self.player, self.stress)
             item.draw(screen)
+        if self.has_reached_50:
+            self.help.draw(screen)
         self.player.draw(screen)
-        self.help.draw(screen)
         return
