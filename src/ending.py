@@ -13,9 +13,12 @@ def reach_door(game : Game):
 
 def ending(window : Window, game : Game):
     game.switchRoom("ending")
+    pygame.mixer.Sound("assets/sfx/stress_bar_sound.mp3").play()
     while not reach_door(game):
+        game.clock.tick(window.fps)
         window.screen.fill((0, 0, 0))
         game.rooms[game.actual_room].draw(window.screen)
+        pygame.event.get()
         game.player.move(pygame.key.get_pressed())
         game.player.draw(window.screen)
     rect = end_screen.get_rect(center=(window.screen.get_width() // 2, window.screen.get_height() // 2))
