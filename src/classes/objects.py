@@ -53,6 +53,7 @@ class Item():
     def randomize(self):
         random.seed(time.time_ns())
         self.pos = pygame.Vector2(random.randint(150, 940), random.randint(200, 890))
+        self.offset = self.pos - self.center
 
     def collect(self, player : Player, stress_bar : StressBar):
         keys = pygame.key.get_pressed()
