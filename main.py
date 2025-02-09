@@ -17,9 +17,7 @@ from src.credits import credits
 from src.ending import ending
 
 # PLAYER INIT
-player = Player("Stellan Voss", [pygame.image.load("assets/img/sprite_detective/detective_front.png"),
-                                 pygame.image.load("assets/img/sprite_detective/detective_back.png")],
-                                80, 110, 2, 450, 450, 1, (540, 540))
+player = Player("Stellan Voss", 80, 110, 540, 540, 1, (540, 540))
 
 # ROOMS INIT
 rooms = {
@@ -126,6 +124,8 @@ def main():
                 first_start = 1
             game.runGame(window.screen)
             stress_bar.update()
+            if stress_bar.current_stress == 100:
+                game.insane = True
             stress_bar.draw(window.screen)
 
         elif game.cycle == ENDED:

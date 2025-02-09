@@ -3,8 +3,8 @@ import math
 
 class Player:
 
-    def __init__(self, name: str, spritesheet, frame_width: int, frame_height: int, num_frames: int,
-                 pos_x: int, pos_y: int, delay: int, rotation_center):
+    def __init__(self, name: str, frame_width: int, frame_height: int,
+                pos_x: int, pos_y: int, delay: int, rotation_center):
         self.name = name
         # Découper les frames du spritesheet
         self.frames = [
