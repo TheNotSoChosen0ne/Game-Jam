@@ -114,8 +114,6 @@ def main():
             menu.credits = False
             menu.active = True
             menu.activeIndex = 0
-            #pygame.mixer.music.stop()
-            pygame.mixer_music.stop()
             music_menu.start_music()
 
         # Print the menu
