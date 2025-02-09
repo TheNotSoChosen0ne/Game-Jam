@@ -4,7 +4,7 @@ from src.classes.game import Game
 from src.classes.window import Window
 from src.credits import credits
 
-end_screen = pygame.image.load("assets/img/texts/congrats.jpg")
+end_screen = pygame.transform.scale(pygame.image.load("assets/img/texts/congrats.jpg"), (1720, 880))
 
 def reach_door(game : Game):
     if game.player.position.distance_to(pygame.Vector2(557, 185)) < 50:
