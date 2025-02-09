@@ -25,7 +25,7 @@ def credits(screen, clock, fps = 30):
         "Corentin Pasquier",
         "Nicolas Bach",
         "Yanis With",
-        "Thibaut Musslin (il a juste fait ce système de crédits",
+        "Thibaut Musslin (il a fait ce système de crédits",
         "mais ne les a pas écrit, donc acte de présence somme toute)",
         "",
         "Audio Engineer: Thibaut Musslin",
