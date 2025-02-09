@@ -1,4 +1,5 @@
 import pygame
+
 from src.classes.music import Music
 
 def credits(screen, clock, fps = 30):
