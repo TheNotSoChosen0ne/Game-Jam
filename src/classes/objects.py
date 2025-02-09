@@ -21,10 +21,10 @@ class Item():
         self.freeze_log = True
         return
 
-    def update(self):
+    def update(self, stress : StressBar):
         elapsed = float(time.time() - self.start_time)
         if self.state == "collected" and self.freezing and elapsed > 10 and self.freeze_log:
-            #stress.freeze(False)
+            stress.freeze(False)
             self.freeze_log = False
             pass
         if self.state == "collected" and elapsed > self.respawn_time:
@@ -57,8 +57,9 @@ class Item():
             if keys[pygame.K_e]:
                 self.state = "collected"
                 stress_bar.change_stress(-self.reducer)
-                #stress_bar.freeze(True)
-                self.freeze_log = True
+                if self.freezing:
+                    stress_bar.freeze(True)
+                    self.freeze_log = True
                 self.randomize()
                 self.startClock()
 

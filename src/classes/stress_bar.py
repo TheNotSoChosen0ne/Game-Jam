@@ -23,6 +23,7 @@ class StressBar:
         self.active = False
         self.sound_time = 0.0
         self.last_update_time = 0.0
+        self.freezed = False
         pygame.font.init()
         self.font = pygame.font.Font(None, 48)
 
@@ -39,7 +40,7 @@ class StressBar:
         """
         if self.active:
             current_time = time.time()
-            if current_time - self.last_update_time >= 0.7:  # timer for the augmentation
+            if current_time - self.last_update_time >= 0.7 and not self.freezed:  # timer for the augmentation
                 self.current_stress = min(self.max_stress, self.current_stress + 1)  # Increase %
                 self.last_update_time = current_time  # Reset timer
             if current_time - self.sound_time >= 10.0 / ((1 + self.current_stress) * 0.1): # timer for the sound
@@ -47,6 +48,9 @@ class StressBar:
                 pygame.mixer.music.load("assets/sfx/stress_bar_sound.mp3")
                 pygame.mixer.music.play(0)
                 self.sound_time = current_time
+
+    def freeze(self, freeze : bool):
+        self.freezed = freeze
 
     def change_stress(self, change):
         """

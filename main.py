@@ -11,6 +11,7 @@ from src.classes.menu import *
 from src.classes.window import *
 from src.classes.room import *
 from src.classes.game import Game
+from src.classes.music import *
 from src.credits import *
 from random import *
 
@@ -61,6 +62,10 @@ menu.addButton(startButton)
 menu.addButton(creditButton)
 menu.addButton(quitButton)
 
+music_menu = Music("assets/music/MELANCHOLIA.wav")
+music_menu.load_music()
+music_menu.play_music()
+
 # FRUIT INIT
 fruits = [
     Item(5, pygame.image.load("assets/img/collect/green_pill.png"), (540, 540), 5, 5, False),
@@ -103,28 +108,41 @@ def main():
 
         # Print credits
         if game.menu.credits:
+            music_menu.stop_music()
             credits(window.screen, game.clock)
             menu.credits = False
             menu.active = True
             menu.activeIndex = 0
+            pygame.mixer.music.stop()
+            music_menu.load_music()
+            music_menu.play_music()
 
         # Print the menu
         elif game.menu.active:
+            if not pygame.mixer.music.get_busy():
+                music_menu.play_music()
             window.screen.blit(window.backgrnd, (0, 0))
             game.menu.draw(window.screen)
+
         # The game
         elif not game.menu.active and first_start == 0:
+            music_menu.stop_music()
             window.screen.fill(BLACK)
             game.runGame(window.screen)
             stress_bar.start()
             game.startClock()
             first_start = 1
+            music_menu.load_music()
+            music_menu.play_music()
 
         elif not game.menu.active:
+            music_menu.stop_music()
             window.screen.fill(BLACK)
             game.runGame(window.screen)
             stress_bar.update()
             stress_bar.draw(window.screen)
+            music_menu.load_music()
+            music_menu.play_music()
 
         window.screen.blit(frames, (0, 0))
 
