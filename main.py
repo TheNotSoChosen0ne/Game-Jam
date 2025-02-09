@@ -2,10 +2,8 @@
 
 import os
 import os.path
-import pygame
-
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
-
+import pygame
 from src.classes.player import Player
 from src.classes.room import Room
 from src.classes.window import Window
@@ -28,7 +26,7 @@ rooms = {
 }
 
 # WINDOW INIT
-window = Window((1920, 1080), "assets/img/background/room2.jpeg", 30, "You are a Detective and you look for clues because there was a crime and you have to find the culprit")
+window = Window((1920, 1080), "assets/img/background/room2.jpeg", 30, "Cops Dementia")
 window.initWindow()
 window.setBackground()
 window.setFont("assets/font/pixel_font.otf", 42)
