@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
 import os
+import os.path
+import pygame
+
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 from src.classes.player import Player
 from src.classes.room import Room
@@ -11,11 +15,6 @@ from src.classes.objects import Item
 from src.classes.stress_bar import StressBar
 from src.classes.game import Game
 from src.credits import credits
-
-import os.path
-import pygame
-
-os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 # PLAYER INIT
 player = Player("Stellan Voss", [pygame.image.load("assets/img/sprite_detective/detective_front.png"),
@@ -62,11 +61,12 @@ menu.addButton(creditButton)
 menu.addButton(quitButton)
 
 
-# FRUIT INIT
-fruits = [
+# PILLS INIT
+pills = [
     Item(5, pygame.image.load("assets/img/collect/green_pill.png"), (540, 540), 5, 5, False),
-    Item(5, pygame.image.load("assets/img/collect/red_pill.png"), (540, 540), 15, 10, False),
-    Item(5, pygame.image.load("assets/img/collect/blue_pill.png"), (540, 540), 30, 0, True)
+    Item(5, pygame.image.load("assets/img/collect/red_pill.png"), (540, 540), 10, 10, False),
+    Item(5, pygame.image.load("assets/img/collect/blue_pill.png"), (540, 540), 25, 0, True),
+    Item(5, pygame.image.load("assets/img/collect/yellow_pill.png"), (540, 540), 15, -20, False)
 ]
 
 # MOUSE
@@ -77,7 +77,7 @@ pygame.mouse.set_visible(False)
 stress_bar = StressBar(x=1730, y=220)
 
 # GAME INIT
-game = Game(player, rooms, menu, fruits, stress_bar)
+game = Game(player, rooms, menu, pills, stress_bar)
 
 
 # MAIN LOOP

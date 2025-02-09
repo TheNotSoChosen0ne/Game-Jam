@@ -1,6 +1,7 @@
+import pygame
+
 from src.classes.sprites import StaticSprite
 from src.classes.game import Game
-import pygame
 
 class Door(StaticSprite):
 
@@ -28,7 +29,7 @@ class Room:
         """Affiche la room avec sa rotation appliquée."""
         rotated_sprite = pygame.transform.rotate(self.sprite, -self.angle)
         rect = rotated_sprite.get_rect(center=self.position)
-        screen.blit(rotated_sprite, rect.topleft)
+        screen.blit(rotated_sprite, rect.topleft) 
 
     def rotate(self):
         """Fait tourner la room en continu dans le même sens."""

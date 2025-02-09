@@ -34,4 +34,3 @@ Pour exécuter le jeu localement, suivez ces étapes :
 
 ## Remerciements
 - Merci à Epitech pour l'organisation de la Game Jam.
-- Remerciements particuliers à Fab pour nous avoir laissé les groupes de 6 et les horaires de rendu.
