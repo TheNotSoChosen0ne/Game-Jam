@@ -1,7 +1,15 @@
 import pygame
 import time
 
+<<<<<<< HEAD
 from src.include import Player, Menu, Item, StressBar
+=======
+from src.classes.player import Player
+from src.classes.menu import Menu
+from src.classes.objects import Item
+from src.classes.stress_bar import StressBar
+from src.classes.sprites import StaticSprite
+>>>>>>> 84308fa8f9085a71ddceaecb7427889e40a24124
 
 ACTIVE = 1
 PASSIVE = 0
@@ -18,6 +26,7 @@ class Game():
         self.items = items
         self.stress = stress
         self.font = pygame.font.Font("assets/font/pixel_font.otf", 42)
+        self.help = StaticSprite(pygame.transform.scale(pygame.image.load("assets/img/collect/legend.png"), (600, 600)), 1200, 200)
         return
 
     def startClock(self):
@@ -37,9 +46,9 @@ class Game():
 
     def runGame(self, screen):
         if 65 <= self.stress.current_stress < 75:
-            self.rooms[self.actual_room].rotation_speed = 1
+            self.rooms[self.actual_room].rotation_speed = 1.0
             self.rooms[self.actual_room].rotation_direction = 1
-            self.player.rotation_speed = 1
+            self.player.rotation_speed = 1.0
             self.player.rotation_direction = 1
             self.rooms[self.actual_room].rotate()
             self.player.rotate()
@@ -48,7 +57,7 @@ class Game():
                 item.rotation_direction = 1
                 item.rotate()
         if 75 <= self.stress.current_stress < 90:
-            self.rooms[self.actual_room].rotation_speed = 2
+            self.rooms[self.actual_room].rotation_speed = 2.0
             self.rooms[self.actual_room].rotation_direction = 1
             self.player.rotation_speed = 1.5
             self.player.rotation_direction = 1
@@ -59,7 +68,7 @@ class Game():
                 item.rotation_direction = -1
                 item.rotate()
         if 90 <= self.stress.current_stress:
-            self.rooms[self.actual_room].rotation_speed = 2
+            self.rooms[self.actual_room].rotation_speed = 2.0
             self.rooms[self.actual_room].rotation_direction = -1
             self.player.rotation_speed = 2.25
             self.player.rotation_direction = 1
@@ -75,4 +84,5 @@ class Game():
             item.collect(self.player, self.stress)
             item.draw(screen)
         self.player.draw(screen)
+        self.help.draw(screen)
         return
