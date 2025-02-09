@@ -54,9 +54,21 @@ def credits(screen, clock, fps = 30):
         "ytb2mp3.org",
         "resizepixel.com",
         "-",
+        "Les amandes émondées",
+        "Les Toblerones",
+        "Les M&M's",
+        "-",
         "L'Orthodontiste de Thibaut",
         "Les mecs qui criaient en AFK",
-        "Les Segfault en Python (oui oui ça existe)"
+        "Les Segfault en Python (oui oui ça existe)",
+        "-",
+        "Et surtout,",
+        "les fou rires tout le week-end",
+        "et le manque de sommeil",
+        "",
+        "",
+        "Merci d'avoir joué à notre jeu !",
+        "Aborted (core dumped)"
     ]
 
     credit_surfaces = [font.render(line, True, WHITE) for line in credits]
