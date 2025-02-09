@@ -8,8 +8,10 @@ class Player:
         self.name = name
         # Découper les frames du spritesheet
         self.frames = [
-            spritesheet[i].subsurface(pygame.Rect(0, 0, frame_width, frame_height))
-            for i in range(num_frames)
+            pygame.image.load("assets/img/sprite_detective/detective_back.png").subsurface(pygame.Rect(0, 0, frame_width, frame_height)),
+            pygame.image.load("assets/img/sprite_detective/detective_front.png").subsurface(pygame.Rect(0, 0, frame_width, frame_height)),
+            pygame.image.load("assets/img/sprite_detective/detective_left.png").subsurface(pygame.Rect(0, 0, frame_width, frame_height)),
+            pygame.image.load("assets/img/sprite_detective/detective_right.png").subsurface(pygame.Rect(0, 0, frame_width, frame_height))
         ]
         
         # Position absolue et calcul de l'offset par rapport au centre de rotation
@@ -63,30 +65,28 @@ class Player:
             else:
                 movement += pygame.Vector2(math.sin(rad), -math.cos(rad)) * self.speed
                 self.limits[1] -= self.speed
-                self.image = self.frames[1]
-                #changement de sprite à faire
+                self.image = self.frames[0]
         if keys[pygame.K_DOWN]:
             if self.limits[1] >= 890:
                 pass
             else:
                 movement += pygame.Vector2(-math.sin(rad), math.cos(rad)) * self.speed
                 self.limits[1] += self.speed
-                self.image = self.frames[0]
-                #changement de sprite à faire
+                self.image = self.frames[1]
         if keys[pygame.K_LEFT]:
             if self.limits[0] <= 150:
                 pass
             else:
                 movement += pygame.Vector2(-math.cos(rad), -math.sin(rad)) * self.speed
                 self.limits[0] -= self.speed
-                #changement de sprite à faire
+                self.image = self.frames[2]
         if keys[pygame.K_RIGHT]:
             if self.limits[0] >= 940:
                 pass
             else:
                 movement += pygame.Vector2(math.cos(rad), math.sin(rad)) * self.speed
                 self.limits[0] += self.speed
-                #changement de sprite à faire
+                self.image = self.frames[3]
         
         self.position += movement
         # Met à jour l'offset par rapport au centre de rotation

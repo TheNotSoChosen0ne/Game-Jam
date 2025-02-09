@@ -9,7 +9,8 @@ class Item():
         self.points = points
         self.image = pygame.transform.scale(image, (80, 80))
         self.rotation = 0
-        self.speed = 2
+        self.rotation_direction = 1
+        self.rotation_speed = 2
         self.pos = pygame.Vector2(random.randint(150, 940), random.randint(200, 890))
         self.center = center
         self.offset = self.pos - self.center
@@ -34,7 +35,7 @@ class Item():
         self.start_time = time.time()
 
     def rotate(self):
-        dangle = self.speed
+        dangle = self.rotation_speed * self.rotation_direction
         self.rotation = (self.rotation + dangle) % 360
         self.offset = self.offset.rotate(dangle)
         self.pos = self.center + self.offset
