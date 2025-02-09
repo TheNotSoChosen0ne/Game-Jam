@@ -13,7 +13,7 @@ def reach_door(game : Game):
 
 def ending(window : Window, game : Game):
     game.switchRoom("ending")
-    pygame.mixer.Sound("assets/sfx/stress_bar_sound.mp3").play()
+    pygame.mixer.Sound("assets/sfx/ding.mp3").play()
     while not reach_door(game):
         game.clock.tick(window.fps)
         window.screen.fill((0, 0, 0))
