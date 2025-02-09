@@ -3,7 +3,7 @@ import math
 
 class Player:
 
-    def __init__(self, name: str, spritesheet, frame_width: int, frame_height: int, num_frames: int, 
+    def __init__(self, name: str, spritesheet, frame_width: int, frame_height: int, num_frames: int,
                  pos_x: int, pos_y: int, delay: int, rotation_center):
         self.name = name
         # Découper les frames du spritesheet
@@ -13,23 +13,23 @@ class Player:
             pygame.image.load("assets/img/sprite_detective/detective_left.png").subsurface(pygame.Rect(0, 0, frame_width, frame_height)),
             pygame.image.load("assets/img/sprite_detective/detective_right.png").subsurface(pygame.Rect(0, 0, frame_width, frame_height))
         ]
-        
+
         # Position absolue et calcul de l'offset par rapport au centre de rotation
         self.position = pygame.Vector2(pos_x, pos_y)
         self.rotation_center = pygame.Vector2(rotation_center)
         self.offset = self.position - self.rotation_center  # Vecteur relatif
         self.limits = [self.position.x, self.position.y]
-        
+
         # Animation
         self.index = 0
         self.timer = 0
         self.delay = delay
         self.image = self.frames[self.index]
-        
+
         # Contrôle du mouvement et de l'orientation
         self.speed = 30
         self.angle = 0  # En degrés, 0° signifie que la tête pointe vers le haut
-        self.rotation_speed = 2
+        self.rotation_speed = 2.0
         self.rotation_direction = -1  # 1 pour horaire, -1 pour anti-horaire
 
     def update(self):
@@ -58,7 +58,7 @@ class Player:
         """
         movement = pygame.Vector2(0, 0)
         rad = math.radians(self.angle)
-        
+
         if keys[pygame.K_UP]:
             if self.limits[1] <= 200:
                 pass
@@ -87,7 +87,7 @@ class Player:
                 movement += pygame.Vector2(math.cos(rad), math.sin(rad)) * self.speed
                 self.limits[0] += self.speed
                 self.image = self.frames[3]
-        
+
         self.position += movement
         # Met à jour l'offset par rapport au centre de rotation
         self.offset = self.position - self.rotation_center
@@ -122,7 +122,7 @@ class Player:
         # Mise à jour de l'angle
         delta_angle = self.rotation_speed * self.rotation_direction
         self.angle = (self.angle + delta_angle) % 360
-        
+
         # Faire tourner le vecteur offset
         self.offset = self.offset.rotate(delta_angle)
         # Recalcule de la position à partir du centre et du nouvel offset
