@@ -26,37 +26,22 @@ class Item():
         self.freeze_log = True
         return
 
-    def update(self, stress: StressBar):
-        elapsed = float(time.time() - self.start_time)
-
-        if stress.current_stress >= stress.max_stress / 2 and not self.spawn_enabled:
-            self.spawn_enabled = True
-            self.state = "collected"
-            timer = time.time()
-            self.start_time = timer
-        if self.state == "collected" and self.freezing and elapsed > 10 and self.freeze_log:
-            stress.freeze(False)
-            self.freeze_log = False
-        if self.state == "collected" and self.spawn_enabled and elapsed > self.respawn_time:
-            self.state = "spawned"
-
     def startClock(self):
         self.start_time = time.time()
 
-    def rotate_back(self):
-        if self.angle == 0:
-            return  # Déjà droit
+    def update(self, stress: StressBar):
+        elapsed = float(time.time() - self.start_time)
 
-        dangle = min(10, abs(self.angle))  # Tourne de 10 max, mais ne dépasse pas 0
-        self.angle -= dangle if self.angle > 0 else -dangle
+        if stress.current_stress >= 45 and not self.spawn_enabled:
+            self.spawn_enabled = True
+            self.state = "collected"
+            self.startClock()
+        elif self.state == "collected" and self.freezing and elapsed > 10 and self.freeze_log:
+            stress.freeze(False)
+            self.freeze_log = False
+        elif self.state == "collected" and self.spawn_enabled and elapsed > self.respawn_time:
+            self.state = "spawned"
 
-        # S'assure que l'angle soit exactement 0 à la fin
-        if abs(self.angle) < 10:
-            self.angle = 0  
-
-        # Mise à jour de la position après rotation
-        self.offset = self.offset.rotate(-dangle if self.angle > 0 else dangle)
-        self.pos = self.center + self.offset
     def rotate(self):
         dangle = self.rotation_speed * self.rotation_direction
         self.angle = (self.angle + dangle) % 360

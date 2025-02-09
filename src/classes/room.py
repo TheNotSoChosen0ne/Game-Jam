@@ -29,18 +29,7 @@ class Room:
         """Affiche la room avec sa rotation appliquée."""
         rotated_sprite = pygame.transform.rotate(self.sprite, -self.angle)
         rect = rotated_sprite.get_rect(center=self.position)
-        screen.blit(rotated_sprite, rect.topleft)
-
-    def rotate_back(self):
-        if self.angle == 0:
-            return  # Déjà droit
-
-        dangle = min(10, abs(self.angle))  # Tourne de 10 max, mais ne dépasse pas 0
-        self.angle -= dangle if self.angle > 0 else -dangle
-
-        # S'assure que l'angle soit exactement 0 à la fin
-        if abs(self.angle) < 10:
-            self.angle = 0  
+        screen.blit(rotated_sprite, rect.topleft) 
 
     def rotate(self):
         """Fait tourner la room en continu dans le même sens."""

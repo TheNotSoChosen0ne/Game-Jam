@@ -65,8 +65,8 @@ music_menu = Music("assets/music/MELANCHOLIA.wav")
 # PILLS INIT
 pills = [
     Item(5, pygame.image.load("assets/img/collect/green_pill.png"), (540, 540), 5, 5, False),
-    Item(5, pygame.image.load("assets/img/collect/red_pill.png"), (540, 540), 15, 10, False),
-    Item(5, pygame.image.load("assets/img/collect/blue_pill.png"), (540, 540), 30, 0, True),
+    Item(5, pygame.image.load("assets/img/collect/red_pill.png"), (540, 540), 10, 10, False),
+    Item(5, pygame.image.load("assets/img/collect/blue_pill.png"), (540, 540), 25, 0, True),
     Item(5, pygame.image.load("assets/img/collect/yellow_pill.png"), (540, 540), 15, -20, False)
 ]
 
