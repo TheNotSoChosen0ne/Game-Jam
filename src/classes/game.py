@@ -16,11 +16,12 @@ class Game():
     def __init__(self, player : Player, rooms, menu : Menu, items : list["Item"], stress : StressBar):
         self.start_time = time.time()
         self.clock = pygame.time.Clock()
+        self.elapsed = 0.0
         self.music = Music("assets/music/game_music.mp3")
         self.actual_room = "hospital"
         self.rooms = rooms
         self.player = player
-        self.cycle = ENDED
+        self.cycle = ACTIVE
         self.menu = menu
         self.color = (0, 0, 0)
         self.items = items
@@ -47,7 +48,9 @@ class Game():
         return
     
     def win(self):
-        if (time.time() - self.start_time >= 203):
+        self.elapsed += (time.time() - self.start_time)
+        self.start_time = time.time()
+        if (self.elapsed >= 15): # 203
             return True
         return False
 
@@ -55,6 +58,9 @@ class Game():
         screen.fill(self.color)
         if not pygame.mixer.music.get_busy():
             self.music.unpause_music()
+        if self.win():
+            self.switchCycle()
+            return
         if self.stress.current_stress >= 50:
             self.has_reached_50 = True
         if not self.has_reached_50:

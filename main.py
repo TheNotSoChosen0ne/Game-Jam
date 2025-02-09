@@ -4,6 +4,7 @@ import os
 import os.path
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 import pygame
+import time
 from src.classes.player import Player
 from src.classes.room import Room
 from src.classes.window import Window
@@ -13,6 +14,7 @@ from src.classes.objects import Item
 from src.classes.stress_bar import StressBar
 from src.classes.game import Game, ACTIVE, ENDED
 from src.credits import credits
+from src.ending import ending
 
 # PLAYER INIT
 player = Player("Stellan Voss", [pygame.image.load("assets/img/sprite_detective/detective_front.png"),
@@ -103,6 +105,7 @@ def main():
         if game.menu.credits:
             menu.music.stop_music()
             credits(window.screen, game.clock)
+            game.start_time += (time.time() - game.start_time)
             menu.credits = False
             menu.active = True
             menu.activeIndex = 0
@@ -114,7 +117,7 @@ def main():
                 menu.music.unpause_music()
             window.screen.blit(window.backgrnd, (0, 0))
             game.menu.draw(window.screen)
-            game.start_time += (pygame.time.get_ticks() / 1000)
+            game.start_time = time.time()
 
         elif game.cycle == ACTIVE:
             if first_start == 0:
@@ -131,7 +134,6 @@ def main():
             ending(window, game)
 
         window.screen.blit(frames, (0, 0))
-
         window.refresh()
 
     pygame.quit()
