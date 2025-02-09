@@ -1,7 +1,7 @@
 import pygame
 import random
-from src.classes.player import Player
 from src.classes.stress_bar import StressBar
+from src.classes.player import Player
 
 import time
 
