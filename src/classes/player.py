@@ -18,7 +18,6 @@ class Player:
         self.position = pygame.Vector2(pos_x, pos_y)
         self.rotation_center = pygame.Vector2(rotation_center)
         self.offset = self.position - self.rotation_center  # Vecteur relatif
-        self.limits = [self.position.x, self.position.y]
 
         # Animation
         self.index = 0
@@ -60,38 +59,33 @@ class Player:
         rad = math.radians(self.angle)
 
         if keys[pygame.K_UP]:
-            if self.limits[1] <= 200:
+            if self.position.y + pygame.Vector2(math.sin(rad), -math.cos(rad)).y * self.speed <= 180 or self.position.y + pygame.Vector2(math.sin(rad), -math.cos(rad)).y * self.speed >= 890 or self.position.x + pygame.Vector2(math.sin(rad), -math.cos(rad)).x * self.speed <= 150 or self.position.x + pygame.Vector2(math.sin(rad), -math.cos(rad)).x * self.speed >= 940:
                 pass
             else:
                 movement += pygame.Vector2(math.sin(rad), -math.cos(rad)) * self.speed
-                self.limits[1] -= self.speed
                 self.image = self.frames[0]
         if keys[pygame.K_DOWN]:
-            if self.limits[1] >= 890:
+            if self.position.y + pygame.Vector2(-math.sin(rad), math.cos(rad)).y * self.speed <= 180 or self.position.y + pygame.Vector2(-math.sin(rad), math.cos(rad)).y * self.speed >= 890 or self.position.x + pygame.Vector2(-math.sin(rad), math.cos(rad)).x * self.speed <= 150 or self.position.x + pygame.Vector2(-math.sin(rad), math.cos(rad)).x * self.speed >= 940:
                 pass
             else:
                 movement += pygame.Vector2(-math.sin(rad), math.cos(rad)) * self.speed
-                self.limits[1] += self.speed
                 self.image = self.frames[1]
         if keys[pygame.K_LEFT]:
-            if self.limits[0] <= 150:
+            if self.position.y + pygame.Vector2(-math.cos(rad), -math.sin(rad)).y * self.speed <= 180 or self.position.y + pygame.Vector2(-math.cos(rad), -math.sin(rad)).y * self.speed >= 890 or self.position.x + pygame.Vector2(-math.cos(rad), -math.sin(rad)).x * self.speed <= 150 or self.position.x + pygame.Vector2(-math.cos(rad), -math.sin(rad)).x * self.speed >= 940:
                 pass
             else:
                 movement += pygame.Vector2(-math.cos(rad), -math.sin(rad)) * self.speed
-                self.limits[0] -= self.speed
                 self.image = self.frames[2]
         if keys[pygame.K_RIGHT]:
-            if self.limits[0] >= 940:
+            if self.position.y + pygame.Vector2(math.cos(rad), math.sin(rad)).y * self.speed <= 180 or self.position.y + pygame.Vector2(math.cos(rad), math.sin(rad)).y * self.speed >= 890 or self.position.x + pygame.Vector2(math.cos(rad), math.sin(rad)).x * self.speed <= 150 or self.position.x + pygame.Vector2(math.cos(rad), math.sin(rad)).x * self.speed >= 940:
                 pass
             else:
                 movement += pygame.Vector2(math.cos(rad), math.sin(rad)) * self.speed
-                self.limits[0] += self.speed
                 self.image = self.frames[3]
 
         self.position += movement
         # Met à jour l'offset par rapport au centre de rotation
         self.offset = self.position - self.rotation_center
-        self.limits = [self.position.x, self.position.y]
 
     def rotate(self):
         """
