@@ -3,22 +3,18 @@
 import os
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
-from src.classes.stress_bar import *
-from src.classes.characters import *
-from src.classes.inventory import *
-from src.classes.objects import *
-from src.classes.menu import *
-from src.classes.window import *
-from src.classes.room import *
+from src.classes.stress_bar import StressBar
+from src.classes.objects import Item
+from src.classes.menu import Menu, ImageButton
+from src.classes.window import Window
+from src.classes.room import Room
 from src.classes.game import Game
-from src.classes.music import *
-from src.credits import *
-from random import *
+from src.classes.music import Music
+from src.classes.player import Player
+from src.credits import credits
 
-from math import *
 import os.path
 import pygame
-import time
 
 # PLAYER INIT
 player = Player("Stellan Voss", [pygame.image.load("assets/img/sprite_detective/detective_front.png"),
@@ -121,7 +117,7 @@ def main():
         # Print the menu
         elif game.menu.active:
             if not pygame.mixer.music.get_busy():
-                music_menu.play_music()
+                music_menu.unpause_music()
             window.screen.blit(window.backgrnd, (0, 0))
             game.menu.draw(window.screen)
 

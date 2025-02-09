@@ -1,5 +1,7 @@
-from src.classes.sprites import *
-from src.classes.inventory import *
+import pygame
+
+from src.classes.sprites import Sprite
+from src.classes.inventory import Inventory
 
 class Character(Sprite):
 
@@ -9,7 +11,7 @@ class Character(Sprite):
         self.movable = False
         self.inventory = Inventory()
         return
-    
+
     def move(self, keys):
         """Déplace le personnage selon les touches pressées."""
         if not self.movable:

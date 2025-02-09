@@ -1,19 +1,16 @@
 import pygame
-import random
-from typing import List
+import time
 
-from src.classes.room import *
-from src.classes.player import *
-from src.classes.menu import *
-from src.classes.window import *
+from src.classes.player import Player
+from src.classes.menu import Menu
 from src.classes.objects import Item
-from src.classes.stress_bar import *
+from src.classes.stress_bar import StressBar
 
 ACTIVE = 1
 PASSIVE = 0
 
 class Game():
-    def __init__(self, player : Player, rooms : list["Room"], menu : Menu, items : list["Item"], stress : StressBar):
+    def __init__(self, player : Player, rooms, menu : Menu, items : list["Item"], stress : StressBar):
         self.start_time = time.time()
         self.clock = pygame.time.Clock()
         self.actual_room = "hospital"
@@ -36,7 +33,7 @@ class Game():
         else:
             self.cycle = PASSIVE
         return
-    
+
     def switchRoom(self, new_room : str):
         self.actual_room = new_room
         return
@@ -78,7 +75,7 @@ class Game():
         self.rooms[self.actual_room].draw(screen)
         for item in self.items:
             item.update(self.stress)
-            item.collect(self.player, self.stress)    
+            item.collect(self.player, self.stress)
             item.draw(screen)
         self.player.draw(screen)
         return

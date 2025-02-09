@@ -1,15 +1,14 @@
 from src.classes.game import Game
-from src.classes.sprites import *
-from src.classes.game import *
+from src.classes.sprites import StaticSprite
 import pygame
 
 class Door(StaticSprite):
-    
+
     def __init__(self, image, pos_x, pos_y, next_room : str):
         super().__init__(image, pos_x, pos_y)
         self.next_room = next_room
         return
-    
+
     def open_door(self, game : Game):
         game.switchRoom(self.next_room)
         return
