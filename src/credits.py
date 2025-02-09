@@ -47,11 +47,16 @@ def credits(screen, clock, fps = 30):
         "Special Thanks:",
         "Mr. Guillaumat",
         "Lorem Ipsum",
+        "-",
         "remove.bg",
         "mp3cut.net",
         "piskelapp.com",
         "ytb2mp3.org",
         "resizepixel.com",
+        "-",
+        "L'Orthodontiste de Thibaut",
+        "Les mecs qui criaient en AFK",
+        "Les Segfault en Python (oui oui ça existe)"
     ]
 
     credit_surfaces = [font.render(line, True, WHITE) for line in credits]
