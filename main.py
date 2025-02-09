@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 
 import os
-os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
-from src.classes.stress_bar import StressBar
-from src.classes.objects import Item
-from src.classes.menu import Menu, ImageButton
-from src.classes.window import Window
-from src.classes.room import Room
-from src.classes.game import Game
-from src.classes.music import Music
 from src.classes.player import Player
+from src.classes.room import Room
+from src.classes.window import Window
+from src.classes.menu import Menu, ImageButton
+from src.classes.music import Music
+from src.classes.objects import Item
+from src.classes.stress_bar import StressBar
+from src.classes.game import Game
 from src.credits import credits
 
 import os.path
 import pygame
+
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 # PLAYER INIT
 player = Player("Stellan Voss", [pygame.image.load("assets/img/sprite_detective/detective_front.png"),
