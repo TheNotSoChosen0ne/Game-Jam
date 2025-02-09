@@ -2,6 +2,8 @@
 
 import os
 
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
+
 from src.classes.player import Player
 from src.classes.room import Room
 from src.classes.window import Window
@@ -14,8 +16,6 @@ from src.credits import credits
 
 import os.path
 import pygame
-
-os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 # PLAYER INIT
 player = Player("Stellan Voss", [pygame.image.load("assets/img/sprite_detective/detective_front.png"),
