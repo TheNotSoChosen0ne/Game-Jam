@@ -1,7 +1,9 @@
 import pygame
 import random
 from src.classes.player import Player
-from src.classes.stress_bar import *
+from src.classes.stress_bar import StressBar
+
+import time
 
 class Item():
 
@@ -63,4 +65,3 @@ class Item():
                     self.freeze_log = True
                 self.randomize()
                 self.startClock()
-

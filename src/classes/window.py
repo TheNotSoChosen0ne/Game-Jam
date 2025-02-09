@@ -1,5 +1,4 @@
 import pygame
-import time
 
 class Window():
     def __init__(self, size : tuple, menuPathImage : str, fps : int, gameName : str):
