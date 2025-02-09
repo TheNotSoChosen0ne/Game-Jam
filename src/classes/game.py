@@ -5,6 +5,7 @@ from src.classes.player import Player
 from src.classes.menu import Menu
 from src.classes.objects import Item
 from src.classes.stress_bar import StressBar
+from src.classes.sprites import StaticSprite
 
 ACTIVE = 1
 PASSIVE = 0
@@ -21,6 +22,7 @@ class Game():
         self.items = items
         self.stress = stress
         self.font = pygame.font.Font("assets/font/pixel_font.otf", 42)
+        self.help = StaticSprite(pygame.transform.scale(pygame.image.load("assets/img/collect/legend.png"), (600, 600)), 1200, 200)
         return
 
     def startClock(self):
@@ -78,4 +80,5 @@ class Game():
             item.collect(self.player, self.stress)
             item.draw(screen)
         self.player.draw(screen)
+        self.help.draw(screen)
         return
