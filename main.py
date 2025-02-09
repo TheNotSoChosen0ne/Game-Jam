@@ -121,18 +121,11 @@ def main():
             window.screen.blit(window.backgrnd, (0, 0))
             game.menu.draw(window.screen)
 
-        # The game
-        elif not game.menu.active and first_start == 0:
-            music_menu.stop_music()
-            window.screen.fill(BLACK)
-            stress_bar.start()
-            game.runGame(window.screen)
-            game.startClock()
-            first_start = 1
-            music_menu.start_music()
-
         elif not game.menu.active:
-            music_menu.stop_music()
+            if first_start == 0:
+                music_menu.stop_music()
+                stress_bar.start()
+                first_start = 1
             window.screen.fill(BLACK)
             game.runGame(window.screen)
             stress_bar.update()
