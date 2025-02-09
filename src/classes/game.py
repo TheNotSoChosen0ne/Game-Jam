@@ -16,7 +16,7 @@ class Game():
     def __init__(self, player : Player, rooms : list["Room"], menu : Menu, items : list["Item"], stress : StressBar):
         self.start_time = time.time()
         self.clock = pygame.time.Clock()
-        self.actual_room = "office"
+        self.actual_room = "hospital"
         self.rooms = rooms
         self.player = player
         self.cycle = PASSIVE

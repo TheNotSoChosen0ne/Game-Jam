@@ -27,7 +27,6 @@ class Item():
         if self.state == "collected" and self.freezing and elapsed > 10 and self.freeze_log:
             stress.freeze(False)
             self.freeze_log = False
-            pass
         if self.state == "collected" and elapsed > self.respawn_time:
             self.state = "spawned"
 
@@ -50,6 +49,7 @@ class Item():
         return
 
     def randomize(self):
+        random.seed(time.time_ns())
         self.pos = pygame.Vector2(random.randint(150, 940), random.randint(200, 890))
 
     def collect(self, player : Player, stress_bar : StressBar):
