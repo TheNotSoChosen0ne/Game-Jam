@@ -21,6 +21,8 @@ def ending(window : Window, game : Game):
         pygame.event.get()
         game.player.move(pygame.key.get_pressed())
         game.player.draw(window.screen)
+        window.refresh()
+
     rect = end_screen.get_rect(center=(window.screen.get_width() // 2, window.screen.get_height() // 2))
     window.screen.fill((0, 0, 0))
     window.screen.blit(end_screen, rect)
