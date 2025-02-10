@@ -9,6 +9,7 @@ from src.classes.stress_bar import StressBar
 from src.classes.music import Music
 from src.classes.sprites import StaticSprite
 
+RUNTIME = 203
 ACTIVE = 1
 ENDED = 0
 
@@ -51,7 +52,7 @@ class Game():
     def win(self):
         self.elapsed += (time.time() - self.start_time)
         self.start_time = time.time()
-        if (self.elapsed >= 10):
+        if (self.elapsed >= RUNTIME):
             self.music.stop_music()
             return True
         return False

@@ -12,7 +12,7 @@ from src.classes.menu import Menu, ImageButton
 from src.classes.music import Music
 from src.classes.objects import Item
 from src.classes.stress_bar import StressBar
-from src.classes.game import Game, ACTIVE, ENDED
+from src.classes.game import Game, ACTIVE, ENDED, RUNTIME
 from src.credits import credits
 from src.ending import ending
 
@@ -88,7 +88,7 @@ def main():
         game.clock.tick(window.fps)
 
         frames = window.font.render("fps: " + str(int(game.clock.get_fps())), 1, WHITE)
-        time_left = window.font.render("time left: " + str(int(203 - game.elapsed)), 1, WHITE)
+        time_left = window.font.render("time left: " + str(int(RUNTIME - game.elapsed)), 1, WHITE)
 
         # Check events
         for event in pygame.event.get():
